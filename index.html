@@ -1,0 +1,3058 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeairScript</title>
+    <link rel="icon" href="sembol2.png" type="icon">
+    <style>
+        body {
+            background-color: gray;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        #kd1 {
+            overflow-x: hidden;
+            resize: none;
+            width: 99%;
+            height: 400px;
+            background-color: black;
+            color: aqua;
+            font-family: monospace;
+        }
+        ::selection {
+            background-color: aqua;
+            color: rgb(103, 114, 0);
+        }
+        #bosbilgi{
+            margin-top: 400px;
+            background-color: black;
+            color: azure;
+            font-family: cursive;
+        }
+    </style>
+</head>
+<body>
+    <h3>Bu platform sayesinde SeairScript kodunu derleyebilirsiniz.</h3>
+    <p id="versiyon">v3.3</p>
+    <p>UYARI: Proje iyi çalışmayabilir.Süper bir dil olarak değil normal bir dil olarak bakın seairscript'e ve AST/Derleyici sistemi tam iyi değil derleyicide bir garip (Derleyici direkt JS yapıyor sonra JS yorumlanıyor JS'nin yorumlandığı dilde herhalde derleniyordu.)</p>
+    <h3>Kod:</h3>
+    <p id="str">Satır sayısı:3</p>
+    <hr>
+    <center>
+        <textarea id="kd1">bismillah
+ssuyar("SeairScript dersi: SeairScript kodu bismillah ve elhamdülillah arasında olmak zorundadır.");
+ssuyar("SeairScript dersi: Kod:ssuyar:ekranda bu pencereden çıkar.");
+ssuyar("SeairScript dersi: Kod:ssyazdır:F12'ye tıklayınca yazdığın yazı gözükür.");
+ssuyar("SeairScript dersi: satırların sonunda ; olmalıdır (bazı istisnalar vardır.).");
+elhamdülillah</textarea>
+        <br>
+        <button onclick="DRL()" style="visibility: hidden;" id="derleme">Derle <!--topla--></button>
+        <button onclick="GNDR()">Yorumla</button>
+        <button onclick="INDR()">İndir (.seairsc)</button>
+    </center>
+    <h3>Sonuç:</h3>
+    <div id="kont1"></div>
+    <iframe src="" frameborder="0" style="width: 100%;height: 400px;" id="derle" sandbox="allow-scripts"></iframe>
+    <hr>
+    <div id="bosbilgi">
+<h4>Biraz bilgi: </h4>
+<hr>
+<p>SeairScript türkçe bir yazılım dilidir.Neredeyse her komutun başında "ss" olmalı.bismillah ile başlayıp elhamdülillah ile bitmeli.Diziler ⌞,→ ve ⌝'ı kullanma nedeni dile 3 versiyondur diziler gelmemesi ve dizilere dilin karşı olması gelincede zor kullanılması içindir.Kodları öğrenmek için <a href="https://turkum-webci.github.io/Albarmaja_Disce">Albarmaja Disce</a>'ye göz atabilirsiniz (Tüm kodlar yok ancak büyük kısmı var ve şuan v2.7'ye göre yapılmış.ve v2.7 eski demeyin çok eski diyin :) ama şaka bir yana şuanlık öğrenme kaynağınız yok.Ama yinede Albarmaja Disce'deki yetiyor.Ve kaynak koduna bakan kolaylıkla öğrenir yada bir AI'a dosyayı atan.).Ek olarak bu dilin bir .vsix ile VSCode uzantısınıda yaptım elhamdülillah.Ve Firefox'taki Albarmaja Disce eklentisinde bu dil ile ilgili sorularda soruluyor. <a href="https://turkum-webci.github.io/sskutuphaneler/">Linkinde</a> yapılmış kütüphaneler bulunur.Şuan birkaç tane kütüphane var mesela: Sipah (hazır veriler,string işlemleri,matematik,dizi,dom,şifreleme vs. var.),Randomil ve Random adlı kütüphane var.Bu kütüphane ile 0 ile seçtiğimiz sayı arasında bir sayı tutuyor.Sipah PHP Çevirici uygulaması ile (tamamen seairscript ile yapılmış ssyukle() ile yüklenir.) Türkçe komutlar ile PHP yazılabiliyor.Linki: https://raw.githubusercontent.com/Turkum-Webci/phpcevirici/refs/heads/main/sipahphpcevirisi.seairsc sonra çok basit bir çeviri uygulaması (Türkçe-İngilizce) var.Dil (bence) alt-orta seviye betik dilidir.Bu dil toy dil değildir (nedeni: string işlemleri,matematik işlemleri,try-catch,diziler,DOM vs. bunlar toy bir dilde olmaz.Bu dil alt-orta betik dilidir esolang değildirde tam olarak.).Ve turing-tam'dır (kanıt: turing-tam olduğu kabul edilen while dilinin içindeki komutların tamamı vardır.).ek olarak bu dili php ile birlikte kullanınca maşAllah iyi oluyor.PHP + SeairScript ile bir online oyun yapıldı. (daha çok bu kanıt olsun diye kötüde olsa bir tıklama oyunu yapıldı ve çalıştı elhamdülillah.Yani seairscript ve php ile online oyun yapılabilir) he birde içinde standartk (standart kütüphane) var.En aşağıda ssminimum falan filan olan yer.Birde siz çoğu şeye değişken atayın mesela ssdikdortgenciz'e falan .d he birde ss eki okunabilirlik için var derse inanmayın .d ama ilk olarak seairscript sadece js'ye çevirlen yani direkt js kodu yapıp veren bir dildi sonra bu gerçek dil haline geldi o zamanları sorun olmasın diye ss vardı ve sonra öyle kaldı kaldırılmadı ama artık okunabilirliğe yarıyor.Yani ssyazdır değil yazdır olsaydı kod ve yazdır adlı bir değişken olsaydı ne olduğu tam anlaşılmazdı ancak ssyazdır olduğundan bilmeyen biri baktığında ss'i es geçer ve bunun kod olduğunu anlar ve içinde yazdır diye değişken varsada herhalde değişkendir der.Ve ss sayesinde bunun seairscript kodu olduğu ayırt ediliyor.</p>
+<select name="" id="font" style="background-color: black;color: white;">
+    <option value="'webdings'" title="%100 öneririm bu olmadan kod yazılırmı?" style="background-color: rgb(0, 0, 0);color: white;" >Webdings</option>
+    <option value="monospace" style="background-color: aliceblue;color: white;">Monospace</option>
+    <option value="cursive" style="background-color: aliceblue;color: white;">El yazısı</option>
+    <option value="'Segoe Script'" style="background-color: aliceblue;color: white;">Segoe Script</option>
+    <option value="'symbol'" style="background-color: aliceblue;color: white;">Symbol</option>
+</select>
+<button onclick="GNDR2()">Gönder</button>
+<button onclick="GNDR3()">Gelişmiş Özellik: derleme (daha doğrusu JS üretme) çalıştır.</button>
+    </div>
+<script>
+    /*
+>>eklenecekler:
+>>1)DOM işlemlerini geliştir DAHA NE YAPAYIM
+>>2)Yeni kodlar ekle (mantıklı mantıksız) ?
+>>3)For döngüsü SAKIN EKLEME
+>>4)mantıksal olmayan ve saçma operatörler ekle. yaptım
+>>5)Regex'i geliştir
+>>6)Daha çok HTML tag'i kabul et tmm
+>>7)Nesne sistemini geliştir
+>>8)console.error benzeri kod ekle
+>>9)join benzeri kod ekle
+>>10)indexOf benzeride ekle
+>>11)** ekle
+>>12)Nesne'ye yeni şey ekleme
+>>13)debug
+>>14)YENİ:Metin işlemeyi geliştir.
+//15)ssseç gibi bir kod,nesneye yazdırma kodu,ifade olarak ssdizidenkov,ifade olarak argüman,operatör uygulama (bir nesneye operatörler ve seairscriptteki karşılıkları yazılııyor ve öncelikleri ve yazılışları onlar direkt oluyor.)
+    */
+    function GNDR2(){
+        document.getElementById("kd1").style.fontFamily = document.getElementById("font").value;
+    }
+    function GNDR3(){
+        document.getElementById("derleme").style.visibility = "visible";
+    }
+var dgsknlr = {};
+var fonksiyonlar = {};
+var cagri = [];
+var domb = {};
+    dgsknlr = new Proxy(dgsknlr, {
+        set: function(trg, prp, vlu){
+            trg[prp] = vlu;
+        if(domb[prp]){
+domb[prp].forEach(function(el){
+    if("value" in el) el.value = vlu;
+    else el.textContent = vlu;
+});
+        }
+        return "evt";
+    }
+    });
+function cagriy(isim, deger){
+        if(cagri.length > 0){
+            var ust = cagri[cagri.length - 1];
+            if (!(isim in ust.yerely)){
+                ust.yerely[isim] = dgsknlr[isim];
+            }
+        }
+        dgsknlr[isim] = deger;
+    }
+console.error("ne? niye konsolu açtın?");
+var ONCELIK = {
+    "+": 1, "-": 1,
+    "*": 2, "/": 2,
+    "%": 2, "#^#": 2,
+    "▸_₺": 3, "◂_₺": 3, "#&#": 1, "#|#": 0, "!◂_₺": 3, "^*": 2,"?": 1, ".d": 2, "]_/(-": 1, "..*": 1, "..#": 1, ":+": 1, ":|": 0, "&.":4
+};
+function matematikHesapla(method, value) {
+    var deger = value != null ? (dgsknlr[value] !== undefined ? dgsknlr[value] : Number(value)) : null;
+    if (method == "karekök") return Math.sqrt(deger);
+    if (method == "rastgele") return Math.random();
+    if (method == "yuvarla") return Math.round(deger);
+    if (method == "asagi") return Math.floor(deger);
+    if (method == "yukari") return Math.ceil(deger);
+    if (method == "mutlak") return Math.abs(deger);
+    if (method == "cos") return Math.cos(deger);
+    if (method == "cosh") return Math.cosh(deger);
+    if (method == "sinh") return Math.sinh(deger);
+    if (method == "tanh") return Math.tanh(deger);
+    if (method == "atanh") return Math.atanh(deger);
+    if (method == "log") return Math.log(deger);
+    if (method == "sin") return Math.sin(deger);
+    if (method == "tan") return Math.tan(deger);
+    if (method == "atan") return Math.atan(deger);
+    if (method == "logon") return Math.log10(deger);
+    if (method == "işaret") return Math.sign(deger);
+    if (method == "pi") return Math.PI;
+    if (method == "sahteeuler") return 5.52 - Math.E; //neden mi?Neden olmasın?
+    if (method == "euler") return Math.E;
+    if (method == "tau") return Math.PI * 2;
+    if (method == "buyukasal") return 1000000007;
+    if (method == "küpkök") return Math.cbrt(deger);
+    if (method == "sonsuz") return "İnfıniti"; //ingilizceyi katleditoruz .d
+    if (method == "ekob") return 1; //En Küçük Ortak Bölen hep 1 olur.
+    if (method == "ebok") return "İnfıniti"; //En Büyük Ortak Kat String olan İnfıniti'dir.
+    if (method == "clz32") return Math.clz32(deger);
+    if (method == "32ye") return Math.fround(deger);
+    if (method == "trunc") return Math.trunc(deger);
+    if (method == "siaos") return 4.372127054964104; //bu: ssmatematik.siao1(10)'un küpkökü.İrrasyonel sayı aslında ama ilk birkaç hanesi yazılabilir.Ve 83.57537279185215'nin küpkök'ünün irrasyonel olduğu zaten mantıken doğru oluyor.
+    if (method == "altinoran") return 1.618033988749;
+    if (method == "catalan") return 0.9159655941772;
+    if (method == "gamasabiti") return 0.5772156649015329;
+    if (method == "irrasyonelgamasabiti") return Math.cbrt(0.5772156649015329); //.d ama yalan mı ama herhalde irrasyonel .d kanıt mı?Kanıt:Konsolda az önce Math.random() döndürdüm 0.90'nın altında birşey çıktı bu da herhalde %90 irrasyonel yani irrasyoneldir.İyi kanıt değilmi .d
+    if (method == "siao1"){ //siao'da Saçma İşlem Ama Olsun demek.Ama yinede siao1(5) yada siao1(10) ile ekranda yüzdeleri belirleyince iyi oluyor.Altın oran gibi.
+        var sncsc = 0;
+        for(var sc = 0;sc <= deger;sc++){
+            sncsc += (deger * sc) / (2 ** Math.E);
+        }
+        return sncsc;
+    }
+    if (method == "siao2"){ //aranızda adam varsa siao2(3)'ün irrasyonel olmadığını kanıtlasın .d bunu ne için kullanacağınızı bilmem ama dursun işte .d
+        var sncsc2 = 2;
+        for(var sc2 = 1;sc2 <= deger;sc2++){
+            sncsc2 *= (deger + (Math.sqrt(sc2) + Math.cbrt(Math.E))) / (Math.sqrt(2) ** ((Math.PI * Math.E) / (100 % Math.cbrt(7))));
+        }
+        return Math.cbrt(sncsc2 ** Math.E);
+    }
+    if (method == "asalmi"){
+if(deger < 2){
+    return "2'den küçük sayı asal olmaz.";
+}
+for(var jl = 2; jl <= Math.sqrt(deger);jl++){
+    if(deger % jl == 0){
+        return "yk";
+    }
+}
+return "evt";
+    }
+    if (method == "faktöriyel"){
+var sncf = 1;
+for(var jk = 1;jk <= deger;jk++){
+sncf *= jk;
+}
+return sncf;
+    }
+    if (method == "superfaktöriyel"){
+var sncsf = 2;
+for(var jkl = 2;jkl <= deger;jkl++){
+sncsf = Math.pow(sncsf, jkl);
+}
+return sncsf;
+    }
+    if (method == "sigma"){
+var sncs = 0;
+for(var jd = 1;jd <= deger;jd++){
+sncs += jd;
+}
+return sncs;
+    }
+    console.error("Bilinmeyen matematik fonksiyonu: " + method);
+    return "bulamadık";
+}
+var mesaj2 = "nerden bileyim?";
+function argkarae(ifade, baslangic){
+var args = [];
+var i = baslangic;
+if (i < ifade.length && ifade[i] == "("){
+    i++;
+}
+while (i < ifade.length && ifade[i] != ")"){
+    if(ifade[i] != ",") args.push(cozArg(ifade[i]));
+    i++;
+}
+return args;
+}
+function isnanmi(tok){ //isnan=İsnane (arapça 2) demek.NaN ile alakasız.daha doğrusu az alakalı
+    return typeof tok == "string" && /^\(\*[\s\S]*\*\)$/.test(tok);
+}
+function isnaneol(tok){
+    var ic = tok.slice(2, -2);
+    var eslesme = ic.match(/^(.*?)(-?\d+(?:\.\d+)?)\s*$/);
+    var obj = eslesme ? {__tip: "isnanetip", metin: eslesme[1].trim(), sayi: Number(eslesme[2])} : { __tip: "isnanetip", metin: ic.trim(), sayi: NaN };
+    obj.toString = function() {return this.metin + " " + this.sayi};
+    obj.valueOf = function() {return this.sayi};
+    return obj;
+}
+function ifadeHesapla(ifade) {
+    if(ifade[0] == "⌞"){
+        var dizi = [];
+        var i = 1;
+        while(i < ifade.length && ifade[i] != "⌝"){
+if(ifade[i] == "→"){
+    i++;
+    continue;
+}
+var elmn = ifadeHesapla([ifade[i]]);
+dizi.push(elmn);
+i++;
+        }
+        return dizi;
+    }
+    if(ifade.length >= 3 && /^[a-zA-ZıİşŞğĞüÜöÖçÇ_][\wıİşŞğĞüÜöÖçÇ]*$/.test(ifade[0]) && ifade[1] == "⌞"){
+        var diziad = ifade[0];
+        var dizi = dgsknlr[diziad];
+        if(!Array.isArray(dizi)){
+            console.error("Bu bir dizi değil: " + diziad);
+            return diziad + " dizi değil.";
+        }
+        var indekst = ifade[2];
+        var indeks = dgsknlr[indekst] != undefined ? dgsknlr[indekst] : Number(indekst);
+        if(isNaN(indeks) || indeks < 0 || indeks >= dizi.length){
+            console.error("Geçersiz dizi indeksi: " + indeks);
+            return diziad + " dizi indeksi geçersiz.";
+        }
+        return dizi[indeks];
+    }
+    if(ifade.length > 3 && typeof ifade[0] == "string" && ifade[0].indexOf("ss") == 0){
+        var hdftok = ifade[2];
+        var hdfdeger = dgsknlr[hdftok];
+        if(hdfdeger && hdfdeger.__tip == "krktr"){
+            var sonuclar = hdfdeger.krkt.map(function(krkt){
+dgsknlr[hdftok] = krkt;
+return ifadeHesapla(ifade);
+            });
+            dgsknlr[hdftok] = hdfdeger;
+            var yeniobj = {__tip: "krktr", krkt: sonuclar.map(String)};
+            yeniobj.toString = function(){return this.krkt.join("");};
+            yeniobj.valueOf = function(){return this.krkt.join("");};
+            return yeniobj;
+        }
+    }
+    if (!ifade || ifade.length == 0) return null;
+    if (ifade.length >= 3 && 
+        /^[a-zA-ZıİşŞğĞüÜöÖçÇ_][\wıİşŞğĞüÜöÖçÇ]*$/.test(ifade[0]) && 
+        ifade[1] == "(") {
+        
+        var fnName = ifade[0];
+        var fn = fonksiyonlar[fnName];
+        
+        if (fn) {
+            var args = [];
+            for (var i = 2; i < ifade.length; i++) {
+                if (ifade[i] == ")") break;
+                if (ifade[i] == ",") continue;
+                args.push(ifade[i]);
+            }
+
+            var yedek = {};
+            for (var i = 0; i < fn.params.length; i++) {
+                var param = fn.params[i];
+                yedek[param] = dgsknlr[param];
+
+                var arg = args[i];
+                var deger;
+                if (dgsknlr[arg] != undefined) {
+                    deger = dgsknlr[arg];
+                } else if (!isNaN(arg) && arg !== "") {
+                    deger = Number(arg);
+                } else {
+                    deger = String(arg).replace(/^"|"$/g, "");
+                }
+                dgsknlr[param] = deger;
+            }
+
+            var donen;
+            if (fn.jsFn) {
+                for (var p in yedek) {
+                    if (yedek[p] == undefined) delete dgsknlr[p];
+                    else dgsknlr[p] = yedek[p];
+                }
+                var cozulmusArgs = args.map(cozArg);
+                donen = fn.jsFn.apply(null, cozulmusArgs);
+            } else {
+                var hm = calistir(fn.body);
+                donen = (hm && hm.__return) ? hm.value : hm;
+                for (var p in yedek) {
+                    if (yedek[p] == undefined) delete dgsknlr[p];
+                    else dgsknlr[p] = yedek[p];
+                }
+            }
+            return donen;
+        }
+    }
+    if(ifade[0] == "ssnesne"){
+var args = [];
+var i = 2;
+while (i < ifade.length && ifade[i] != ")"){
+if(ifade[i] == ","){i++; continue;}
+var anahtar = ifade[i];
+i++;
+if(ifade[i] == "→") i++;
+var deger = ifade[i];
+i++;
+args.push({anahtar:anahtar, deger:deger});
+}
+var obj = {};
+for (var j = 0; j < args.length; j++){
+    var key = args[j].anahtar;
+    var val = cozArg(args[j].deger);
+    obj[key] = val;
+}
+//if(Math.random() < 0.05){
+//    hmbh("Öyle nesne falan olmaz git JS'ye orda kullan nesneyi.Burası seairscript.");
+//    return "nesneye hayır.";
+//}
+//sevinebilirsiniz .d artık nesneyi sorunsuz kullanacaksınız.v3.0'daki güncelleme bu.
+return obj;
+    }
+    if(ifade[0] == "ssnesnecek"){
+var nesne = cozArg(ifade[2]);
+var anahtar = cozArg(ifade[4]);
+return nesne[anahtar];
+    }
+    if (ifade[0] == "ssunutma"){
+        var a = argkarae(ifade, 1);
+        var anahtar = String(a[0]);
+        var deger = a[1];
+        try{
+localStorage.setItem(anahtar, deger);
+return anahtar + "'a " + deger + " kaydedildi.";
+        }catch (e){
+hmbh("Kaydedilemedi: " + e.message, "ssunutma");
+return anahtar + "'a " + deger + " kaydedilemedi.";
+        }
+    }
+    if (ifade[0] == "sskaraeveri"){
+        var a = argkarae(ifade, 1);
+        var anahtar = String(a[0]);
+        var sonuc = localStorage.getItem(anahtar);
+        return sonuc == null ? null : sonuc;
+    }
+    if (ifade[0] == "ssunut"){
+        var a = argkarae(ifade, 1);
+        var anahtar = String(a[0]);
+        var sonuc = localStorage.removeItem(anahtar);
+        return anahtar + " unutuldu.";
+    }
+    if (ifade[0] == "ssmatematik") {
+        var method = ifade[2];
+        var value = null;
+        if (ifade[3] == "(") {
+            if (ifade[4] == "-" && ifade[5] != ")") {
+                value = "-" + ifade[5];
+            } else if (ifade[4] != ")") {
+                value = ifade[4];
+            }
+        }
+        return matematikHesapla(method, value);
+    }
+
+    if (ifade[0] == "sstagekle") {
+        var etiket = null;
+        if (ifade[1] == "(" && ifade[2] && ifade[2] != ")") {
+            etiket = ifade[2].replace(/"/g, "");
+        }
+        var izinli = ["a", "p", "button", "h1", "div", "input", "textarea", "iframe", "img", "marquee", "font", "center", "h2", "h3", "h4", "h5", "h6", "ul", "li", "canvas", "table", "tr", "td", "th", "i", "b", "s", "u", "ol", "span"];
+        if (izinli.indexOf(etiket) === -1) {
+            console.error("Burası HTML değil.. Senin kullandığın tag ise: " + etiket + " Git p kullan " + etiket + "'ine layık mısında kullanasın?Ancak yinede HTML'i severiz.");
+            return etiket + " kullanılmamalıydı.";
+        }
+        return document.createElement(etiket);
+    }
+
+    if (ifade[0] == "ssdegercek") {
+        var elad = ifade[2];
+        var el = dgsknlr[elad];
+        if (!el) {
+            console.error("Element bulunamadı: " + elad);
+            return elad + " Bu bulunamadı.";
+        }
+        return el.value;
+    }
+    if (ifade[0] == "ssnukleer") {
+        while(1 == 1);//ııı..
+        return ":)";
+    }
+    if (ifade[0] == "ssiçin") {
+        for(var foristersensonsuzdonguyegirersin = 0;foristersensonsuzdonguyegirersin < 10;foristersensonsuzdonguyegirersin--);
+        return "for istememeliydin.FOR YASAK.";
+    }
+    if (ifade[0] == "ssyeritekrarlatüm") { //ssyeritekrarla vardı ama hepsi için biz döngü kuruyorduk.Artık gerek yok :) v3.2'de geldi hemde.Saçma sapan nükleer kodlardan sonra.
+        var a = argkarae(ifade, 1);
+        return String(a[0]).replaceAll(a[1], a[2]);
+    }
+    if (ifade[0] == "sssayicek") {
+        var elad = ifade[2];
+        var el = dgsknlr[elad];
+        if (!el) {
+            console.error("Element bulunamadı: " + elad);
+            return elad + " Bu bulunamadı.";
+        }
+        return Number(el.value);
+    }
+    if(ifade[0] == "ssnizamla"){
+        var a = argkarae(ifade, 1);
+        var dizi = a[0];
+        if(!Array.isArray(dizi)){
+            hmbh("Hata: Bu bir dizi değil.ha bir bak belki [ yada ] kullanmıştırsın ha JS bilen varlık?⌞→⌝ böyle yapacan kolay dizi yasak.", "ssnizamla");
+            hmbh("İpucu:dizi işlemleri yapma.", "sen"); //:D
+            return "hata var.1";
+        }
+        var kopya = dizi.slice();
+        kopya.sort(function (x, y){
+if(typeof x == "number" && typeof y == "number") return x - y;
+return String(x).localeCompare(String(y), "tr");
+        });
+        return kopya;
+    }
+    if(ifade[0] == "sskoyyolu"){ //köye gitmeden önceki yazılan kodlar part2
+var a = argkarae(ifade, 1);
+var dizi = a[0];
+var fnad = a[1];
+if(!Array.isArray(dizi)){
+    hmbh("Bu yol çok çukurlu.İlk başta yolu öğren.Tercüme: sskoyyolu'nun ilk parametresi dizi olmalı.", "sskoyyolu");
+    return "çakıl sesi baya fazlaydı.Yavşan-Arıkmusaya'da daha 5km var.";
+}
+var fn = fonksiyonlar[fnad];
+if(!fn){
+hmbh("Olmayan yolun hayallerine daldın.Şu yolun: " + fnad, "sskoyyolu");
+return "hata var yukarda";
+}
+var param = fn.params[0];
+var ydk = dgsknlr[param];
+var sncdizi = dizi.map(function (eleman){
+    dgsknlr[param] = eleman;
+    return fn.jsFn ? fn.jsFn(eleman) : calistir(fn.body);
+});
+if(ydk == undefined) delete dgsknlr[param];
+else dgsknlr[param] = ydk;
+return sncdizi;
+    }
+    if(ifade[0] == "ssfiltrele"){
+var a = argkarae(ifade, 1);
+var dizi = a[0];
+var fnad = a[1];
+if(!Array.isArray(dizi)){
+    hmbh("ilk parametre dizi olmalı.", "ssfiltrele");
+    return "parametre dizi değil neyi filtrelesin";
+}
+if(ifade[0] == "ssss2"){
+return "Bir kodda kod ve değişken ayırt edilmemesi \n Bir kodda nesne çorbası olması \n Bir kodda anlamını bilmediğin ama kullandıkların olması \n Bir kodun ne anlattığının yanında nasıl anlattığının belli olmaması.. bunlar kötüdür.\n Bunların zıttı ise iyidir.\nBir dilde hata satırı söyleniyorsa kötüdür\nBir dilde for varsa kötüdür\nBir dilde soyutlama yoksa kötüdür\nBir dilde girinti zorunluysa kötüdür\nBir dilde <=> operatörü varsa ve satır sonunda ; yoksa ve end diye kod varsa o dil aşırı kötüdür.\nBir dil türkçeyse iyidir\nBir kişi ssiçin yazmadıysa kötüdür.Tam şu kodu yazmadıysa kötü bir dili seviyor olabilir:\nbismillah\nssdeğişken a = ssiçin;\nelhamdülillah\n tam bu kodu.";
+}
+var fn = fonksiyonlar[fnad];
+if(!fn){
+hmbh("Fonksiyon bulunamadı: " + fnad, "ssfiltrele");
+return "fonksiyon bulunamadı.";
+}
+var param = fn.params[0];
+var ydk = dgsknlr[param];
+var sncdizi = dizi.filter(function (eleman){
+    dgsknlr[param] = eleman;
+    var sonuc = fn.jsFn ? fn.jsFn(eleman) : calistir(fn.body);
+    return sonuc ? true : false;
+});
+if(ydk == undefined) delete dgsknlr[param];
+else dgsknlr[param] = ydk;
+return sncdizi;
+    }
+    if(ifade[0] == "sskedi"){
+        return "kedi";
+    }
+    if(ifade[0] == "ssmıncır"){
+        return "mıncır";
+    }
+    if(ifade[0] == "sspythonvsc"){
+        return "c";
+    }
+    if(ifade[0] == "sspythonvsss"){
+        return "python";
+    }
+    if(ifade[0] == "ssjssevermisin"){
+        return "evet.es3-es5'i çok severim.yeterki if()'te girinti değil blok olsun ve sonunda ; olsun bir yazılım dilinde OOP yada prosedürel olması beni ilgilendirmez.";
+    }
+    if(ifade[0] == "sscsevermisin"){
+        return 'evet.saygı duyduğumuz dildirde char a[6] = "merhaba"; biraz saçma.Ama neyse';
+    }
+    if(ifade[0] == "ssphpsevermisin"){
+        return "elbette";
+    }
+    if(ifade[0] == "sspythonusevermisin"){
+        return "hayır.girinti ne ; olmaması ne sorun var.";
+    }
+    if(ifade[0] == "ssdusman"){
+        return "Python, Hem rakip hem düşman .d";
+    }
+    if(ifade[0] == "ssdost"){
+        return "PHP";
+    }
+    if(ifade[0] == "ssruby"){
+        return "Ruby ne?Maden olan mı?Yeniyor mu?Yoksa toy dil mi?Belki python gibidir?hangisi yani ruby herhalde maden olan.Hatta bence toy dil olan direkt hatta dil bile olmayabilir sadece adı olabilir.şaka bir yana çok saçma bir dil yani python varken kim kullansın bak python'u bile övdüm yani.";
+    }
+    if(ifade[0] == "ssdeğişken_abj"){
+        return "Function-scope geldi artık abc vardır korkusuyla ssdeğişken abj yapmana gerek yok.";
+    }
+    if(ifade[0] == "İnfıniti"){
+        return Infinity;
+    }
+    if(ifade[0] == "ssnan"){
+        return NaN;
+    }
+    if(ifade[0] == "ssjaljs"){
+        return "eski sözde yazılım dili projemdi.Ama yinede iyiydi.";
+    }
+    if(ifade[0] == "ssniyerubysevmiyorsun"){
+        return "sevilecek özelliği yok çünkü.";
+    }
+    if(ifade[0] == "ssperl"){
+        return "write-only dil diyorlar haklılarda aşırı regex var.Ama yine iyi.";
+    }
+    if(ifade[0] == "ssjava"){
+        return "aşırı uzun kod yazdırıyor.";
+    }
+    if(ifade[0] == "sscpp"){
+        return "c'nin saçmalaşmış hali.";
+    }
+    if(ifade[0] == "ssrust"){
+        return "severim.";
+    }
+    if(ifade[0] == "ssgo"){
+        return "saçma dil.";
+    }
+    if(ifade[0] == "sshaskell"){
+        return "çok ciddi.";
+    }
+    if(ifade[0] == "ssassembly"){
+        return "string yok işte o sorun.";
+    }
+    if(ifade[0] == "sshtml"){
+        return "severiz.";
+    }
+    if(ifade[0] == "sscss"){
+        return "severizde abartmayın yani.";
+    }
+    if(ifade[0] == "ssnodejs"){
+        return "JS'de frameworkleri sevmem.";
+    }
+    if(ifade[0] == "sserlang"){
+        return "Garip dil.";
+    }
+    if(ifade[0] == "ssss"){ //tamamen seairscript'e düşman olan kod .d 1. madde dışında hepsi neredeyse var kısmen 3. maddede var kısmen 4'te var (dosyaya yazdırma vs. gibi back-end işlemleri)
+        return "bir dil hem makine hem kullanıcı için okunulabilirliği dengede tutmazsa, O dil kötüdür \n Bir dil çoğu dile sembol olarak meydan okuyorsa o dil kötüdür \n bir dil okunaksızsa o dil kötüdür \n bir dil asgari özellikleri kapsamıyorsa o dil kötüdür \n bir dil yavaşsa o dil ağır işlemler için kötüdür \n Bir dilin kötülükleri sayıldıysada bu o dilin kötü olduğundan diye değil övülecek çok şeyi olduğundan ancak övmeye zaman kalmadığındandır.tabii bazı istisnalarda vardır yani övülmeye zaman kalmadığından değil gerçekten kötü olan mesela seairscr- şaka yapıyorum seairscriptinde iyi olduğu alanlar var.o kadarda düşman olmayak kendi dilimize .d ama gerçekten bazı konularda başarısız bazı konularda gerçekten iyi.";
+    }
+    if(ifade[0] == "ssa"){ //alakasız olduğundan burda.
+        return Infinity;
+    }
+    if(ifade[0] == "ssbuyukbug"){
+        return "Tüm bug'ların temelinde elbetteki o bug vardır.O bug ki deadline'a yetişemememize neden olur.O bug ki yazılımcıların korkulu rüyasıdır.O bug elbette ki 418'dir.";
+    }
+    if(ifade[0] == "ssbuyukbuggercek"){
+        return "Segfault bence yeterince büyük.He front-end'den NaN bazenleri bazenleride Syntax Error back-end'den fatal error seairscript'ten fonksiyon bulunamadı: ssyazdr gibi.(bu ssyazdr'ın nerden geldiğini hepiniz biliyorsunuz .d)";
+    }
+    if(ifade[0] == "ssenkotuyazilimdili"){
+        console.log("SeairScript"); //bir insanlar şaşırsın yani dimi .d
+        return "SeairScript dememi bekliyordun değilmi?he o yazıyada kanma.Ama bence basic.heryerde goto yazıyor yani kötü.";
+    }
+    if(ifade[0] == "ssblokscope"){
+return "sen niye if'te yada while'da değişken tanımlarsın ki?";
+    }
+    if(ifade[0] == "sscanvasilenapacaz"){
+return "yap yapacağını işte .d işe yarar yani.";
+    }
+    if(ifade[0] == "sspizza"){
+        return "pizza";
+    }
+    if(ifade[0] == "sspide"){
+        return "pide";
+    }
+    if(ifade[0] == "ssordu"){
+        return "ordu";
+    }
+    if(ifade[0] == "sstarih"){
+        return "tarihe baya merakım var.Yani güzel diyelim aslında ssrastgeledevlet'ten anlamalıydınız .d";
+    }
+    if(ifade[0] == "sslisans"){
+        return "MIT lisansı açık kaynak.Github reposu ve github pages ile site bile var.";
+    }
+    if(ifade[0] == "ssbukodkacyilindayazildi"){
+        return "2026/1448.";
+    }
+    if(ifade[0] == "ssrenkdegistir"){
+        var soru7 = confirm("Arka plan'ı değiştirmek istiyormusunuz?");
+        var a = argkarae(ifade, 1);
+        var renk = a[0];
+        if(renk == "yeşil") renk = "green";
+        else if(renk == "mavi") renk = "blue";
+        else if(renk == "kırmızı") renk = "red";
+        else if(renk == "beyaz") renk = "white";
+        else if(renk == "gri") renk = "gray";
+        else if(renk == "siyah") renk = "black";
+        else if(renk == "pembe") renk = "purple";
+        else if(renk == "parlakmavi") renk = "aqua";
+        else if(renk == "turuncu") renk = "orange";
+        if(soru7){
+            document.body.style.backgroundColor = renk;
+            return "arkaplan artık " + renk + " renginde.";
+        }
+        else{
+        return "arkaplan " + renk + " renginde değil.";
+        }
+    }
+    if(ifade[0] == "sskonumat"){
+        return "al konum: " + navigator.geolocation;
+    }
+    if(ifade[0] == "ssrubyiseviyorum"){
+        console.log("Aslında haklısın ruby bencede aslında iyi bir dil.Mesela girinti zorunlu değil istersen biraz düşün.Ve seairscriptten dürüst olalım daha iyi."); //bunlar oyalamak için.Gerçek değiller .d
+        setTimeout(function(){
+        while(true);
+        },1000);
+    }
+    if(ifade[0] == "ssasagisatir"){ //... Olması yetmezmi yani?Öyle string'in içine \n sıkıştırmaktan daha okunaklı yani değişken atayıp sonra yazmak o kadar istiyorsanız değişken adını n yapın yani .d
+        return "\n";
+    }
+    if(ifade[0] == "ssmatematikseltopla"){
+        var a = argkarae(ifade, 1);
+        var b = a[0].toString();
+        var c = a[1].toString();
+        var d = b + c;
+        return parseInt(d);
+    }
+    if(ifade[0] == "ssdizidenkov2"){
+        var dizi = dgsknlr[ifade[2]];
+        if(!Array.isArray(dizi)){
+            hmbh("Bu bir dizi değil: " + ifade[2], "ssdizidenkov2");
+            return "yk";
+        }
+        return dizi.pop();
+    }
+    if(ifade[0] == "ssnesneyeyaz"){ //v3.2: içimden niyeyse nesneyi geliştirmek geliyor belki class gelir .d
+        var nesne = cozArg(ifade[2]);
+        var anhtr = cozArg(ifade[4]);
+        var dgr = cozArg(ifade[6]);
+        if(!nesne || typeof nesne != "object" || Array.isArray(nesne)){
+            hmbh(ifade[2] + " bu bir nesne değil.", "ssnesneyeyaz");
+            return "yk";
+        }
+        nesne[anhtr] = dgr;
+        return dgr;
+    }
+    if(ifade[0] == "ssşaltervakası"){//switch:şalter, case:vaka :D
+var a = argkarae(ifade, 1);
+var dgr2 = a[0];
+var i = 1;
+while(i + 1 < a.length){
+    if(dgr2 == a[i]) return a[i + 1];
+    i += 2;
+}
+return (a.length % 2 == 0) ? a[a.length - 1] : null;
+    }
+    if(ifade[0] == "ssdomguncelle"){
+        var a = argkarae(ifade, 1);
+        var el = a[0];
+        var dgsnkad = ifade[4];
+        if(!domb[dgsnkad]) domb[dgsnkad] = [];
+        domb[dgsnkad].push(el);
+        dgsknlr[dgsnkad] = dgsknlr[dgsnkad];
+        return "bağlandı.";
+    }
+    if(ifade[0] == "ssoperatoruygula"){
+var a = argkarae(ifade, 1);
+var sol = a[0],op = a[1], sag = a[2];
+switch(op){
+    case "+": return sol + sag;
+    case "-": return sol - sag;
+    case "*": return sol * sag;
+    case "/": return sag == 0 ? 50 : sol / sag;
+    case "%": return sol % sag;
+    case "<": return sol < sag ? "evt" : "yk";
+    case ">": return sol > sag ? "evt" : "yk";
+    case "<=": return sol <= sag ? "evt" : "yk";
+    case ">=": return sol >= sag ? "evt" : "yk";
+    case "==": return sol === sag ? "evt" : "yk";
+    case "!=": return sol != sag ? "evt" : "yk";
+    case "^*": return sol ** sag;
+    case "#^#": return sol ^ sag;
+    case "#|#": return sol | sag;
+    case "#&#": return sol & sag;
+    case "#<#": return sol << sag; //bu seferki tl falan değil basit.
+    case "#>#": return sol >> sag;
+    default: hmbh("Bilinmeyen Operatör: " + op, "ssoperatoruygula");
+}
+    }
+    if(ifade[0] == "ssdogrumu"){
+        var a = argkarae(ifade, 1);
+        var v = a[0];
+        if(v === 0 || v === "" || v === null || v === undefined) return "yk";
+        if(Array.isArray(v) && v.length == 0) return "yk";
+        return "evt";
+    }
+    if(ifade[0] == "ssanahtarlar"){
+var a = argkarae(ifade, 1);
+var nesne = a[0];
+if(typeof nesne == "object" || typeof nesne !== null){ //iki ==? maalesef olmaz şuan üç tane kullanmalıyım.
+    if(0.05 > Math.random()){
+    if(document.getElementById("kd1").value.includes("ssyazdır")){
+    hmbh("Fonksiyon bulunamadı: ssyazdr", "ssfonksiyon"); //:D
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("sstagekle")){
+    hmbh("Fonksiyon bulunamadı: sstgekle", "ssfonksiyon");
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("ssnesne")){
+    hmbh("Fonksiyon bulunamadı: ssnesn", "ssfonksiyon");
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("sskontaekle")){
+    hmbh("Fonksiyon bulunamadı: sscontaekle", "ssfonksiyon");
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("ssdeğişken")){
+    hmbh("ssdegisken adlı bir kod bulunmuyor.", "ssdeğişken");
+    return null;
+    }
+}
+else{
+    hmbh("ssdegerler bir nesne bekler.", "sen- pardon ssanahtarlar");
+    return "evet beklerler.";
+}
+return Object.values(nesne);
+}
+    }
+    if(ifade[0] == "ssdegerler"){
+var a = argkarae(ifade, 1);
+var nesne = a[0];
+if(typeof nesne == "object" || typeof nesne !== null){
+    if(0.05 > Math.random()){
+    if(document.getElementById("kd1").value.includes("ssyazdır")){
+    hmbh("Fonksiyon bulunamadı: ssyazdr", "ssfonksiyon");
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("sstagekle")){
+    hmbh("Fonksiyon bulunamadı: sstgekle", "ssfonksiyon");
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("ssnesne")){
+    hmbh("Fonksiyon bulunamadı: ssnesn", "ssfonksiyon");
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("sskontaekle")){
+    hmbh("Fonksiyon bulunamadı: sscontaekle", "ssfonksiyon");
+    return null;
+    }
+    else if(document.getElementById("kd1").value.includes("ssdeğişken")){
+    hmbh("ssdegisken adlı bir kod bulunmuyor.", "ssdeğişken");
+    return null;
+    }
+}
+else{
+    hmbh("ssdegerler bir nesne bekler.", "ssdegerler ve sen");
+    return "evet.";
+}
+return Object.keys(nesne);
+}
+    }
+    if (ifade[0] == "sssor") {
+        var mesaj = ifade[2] ? ifade[2].replace(/"/g, "") : "";
+        return prompt(mesaj);
+    }
+    if (ifade[0] == "sssayisor") {
+        var mesaj = ifade[2] ? ifade[2].replace(/"/g, "") : "";
+        return parseFloat(prompt(mesaj));
+    }
+    if (ifade[0] == "ssharfmi") {
+        var a = argkarae(ifade, 1);
+        return /^[a-zA-ZıİşŞğĞüÜöÖçÇ]$/.test(String(a[0])) ? "evt" : "yk";
+    }
+    if (ifade[0] == "sssayimi") {
+        var a = argkarae(ifade, 1);
+        return /^0-9$/.test(String(a[0])) ? "evt" : "yk";
+    }
+    if (ifade[0] == "ssboslukmu") {
+        var a = argkarae(ifade, 1);
+        return /^\s$/.test(String(a[0])) ? "evt" : "yk";
+    }
+    if(ifade[0] == "sskodekle"){ //artık kütüphaneler daha iyi olur .d
+        var a = argkarae(ifade, 1);
+        var ad = String(a[0]);
+        var prmlr = [];
+        for(var j = 1; j < a.length - 1;j++) prmlr.push(String(a[j]));
+        var gvd = String(a[a.length - 1]);
+        fonksiyonlar[ad] = {
+            params: prmlr,
+            ozel: true,
+            kaynak: gvd,
+            body: TKNRZ("bismillah\nssdöndür " + gvd + ";\nelhamdülillah")
+        };
+        fonksiyonlar[ad].body.shift();
+        fonksiyonlar[ad].body.pop();
+        fonksiyonlar[ad].body = PRS(fonksiyonlar[ad].body).body;
+        return ad + " tanımlandı.";
+    }
+    if(ifade[0] == "sskarakter"){
+        var a = argkarae(ifade, 1);
+        var metin = a[0];
+        var indeks = Number(a[1]);
+        return String(metin)[indeks] || "";
+    }
+    if(ifade[0] == "sskarakterkodu"){
+    var a = argkarae(ifade, 1);
+    var metin = String(a[0]);
+    var indeks = a[1] != undefined ? Number(a[1]) : 0;
+    return metin.charCodeAt(indeks) || 0;
+}
+if(ifade[0] == "ssharfyap"){
+    var a = argkarae(ifade, 1);
+    var kod = Number(a[0]);
+    return String.fromCharCode(kod);
+}
+if(ifade[0] == "sskodcalistir"){
+    var kod = cozArg(ifade[2]);
+    try{
+    var kodtoken = TKNRZ(kod);
+    var ast = PRS(kodtoken);
+    calistir(ast.body);
+    return kod;
+    }catch(e){
+        hmbh("Kod çalıştırılamadı hata mesajı: " + e.message, "sskodcalistir");
+        return e.message;
+    }
+}
+    if (ifade[0] == "sslorem" || ifade[0] == "ssdag") {
+        return "Ağrı Cilo Uludoruk Süphan Kaçkar Erciyes Küçükağrı Ketintepe Krenek Sönmez Toros Uludağ Kösedağ Mescit Beyler Göztepe Allahu Ekber İnegöl İdris Cudi Bozdağ Karadağ Susuz.";
+    }
+    if (ifade[0] == "ssdegiskensil") {
+        var degisken = ifade[2];
+        if(!dgsknlr[degisken]){
+            hmbh(degisken + " adında bir değişken bulunamadı", "ssdegiskensil");
+            return degisken + " adlı değişken bulunamadı.";
+        }
+        else{
+        delete dgsknlr[degisken];
+        return degisken + " silindi.";
+        }
+    }
+    if(ifade[0] == "ssgetir"){
+        var url = ifade[2] ? ifade[2].replace(/"/g, "") : "";
+    var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, false);
+        try{
+            xhr.send();
+            if(xhr.status == 200){
+                return xhr.responseText;
+            }else{
+                hmbh("HTTP Hatası: " + xhr.status + " Şu URL'de: " + url, "ssgetir");
+                return "http hatası var.";
+            }
+        }catch(e){
+hmbh("İstek başarısız oldu: " + e.message + " Şu URL'de: " + url, "ssgetir");
+return e.message;
+        }
+        }
+        if(ifade[0] == "ssliste"){
+        var a = argkarae(ifade, 1);
+        a[0].innerHTML = "";
+        a[1].forEach(function(e){var li = document.createElement("li"); li.textContent = e;a[0].appendChild(li);});
+        return a[1].length;
+        }
+        if(ifade[0] == "ssanlatarakiste"){
+        var a = argkarae(ifade, 1);
+        var url = a[0] || "";
+        var metod = a[1] || "GET";
+        var headers = a[2] || {};
+        var veri = a[3] != undefined ? a[3] : "verisiz";
+        var xhr = new XMLHttpRequest();
+        xhr.open(metod, url, false);
+        for(var h in headers){
+            xhr.setRequestHeader(h, headers[h]);
+        }
+        try{
+            xhr.send(veri);
+            var sonuc = {
+                statu:xhr.status,
+                yazi:xhr.responseText,
+                basari:xhr.status == 200,
+                hata:"yok"
+            };
+            sonuc.toString = function() {return this.yazi; }; //yani this kullanmak.. neyse birşey olmaz bir kereye mahsus (!)
+            return sonuc;
+        }catch(e){
+            var sonuc = {
+                statu:0,
+                yazi:"",
+                basari:false,
+                hata:e.message
+            };
+            sonuc.toString = function() {return "Hata " + this.hata; };
+            return sonuc;
+        }
+        }
+        if(ifade[0] == "ssgonder"){
+        var a = argkarae(ifade, 1);
+        var url = a[0] || "";
+        var veri = a[1] != undefined ? a[1] : "";
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        try{
+            xhr.send("veri=" + encodeURIComponent(veri));
+            if(xhr.status == 200){
+                return xhr.responseText;
+            }else{
+                var random = Math.random();
+                if(random < 0.03){
+                    xhr.status = "418"; //Ben bir çaydanlığım, kahve demleyemem.
+                }
+                hmbh("HTTP Hatası: " + xhr.status + " Şu URL'de: " + url, "ssgonder");
+                return xhr.status + " hatası var.";
+            }
+        }catch(e){
+hmbh("İstek başarısız oldu: " + e.message + " Şu URL'de: " + url, "ssgonder");
+console.log("Öneri: Belki CORS ile ilgili olabilir.");
+return "istek başarısız.";
+        }
+        }
+        if(ifade[0] == "ssjsonoku"){ //JSon değil SSon burası JS değil- js kodu yazarken yazdığım yorum satırı . he değiştirdim çünkü belki sson diye birşey çıkabilir ssssonoku yerine ssjsonoku yaptım.
+var a = argkarae(ifade, 1);
+var metin = a[0];
+console.log("ssjsonoku'ya gelen metin:", metin);
+console.log("Türü:", typeof metin);
+try{
+    return JSON.parse(metin);
+}catch(e){
+    if(Math.random() < 0.1){
+        var kodlar2 = ["syazdır", "sssuyar", "ssayiyacevir", "sssmetinver", "ssdegsken", "ssgondr", "ssrastgele", "ssyazdir"];
+        var random2 = Math.floor(Math.random() * kodlar2.length) + 1;
+        hmbh("Fonksiyon Bulunamadı: " + kodlar2[random2], "ssfonksiyon");
+    }
+    else{
+    hmbh("JSON okunamadı: " + e.message, "sen ve ssjsonoku");
+    return null;
+    }
+}
+        }
+        if(ifade[0] == "ssjsonyaz"){
+var a = argkarae(ifade, 1);
+var deger = a[0];
+var girinti = a[1] != undefined ? Number(a[1]) : 0;
+try{
+    return JSON.stringify(deger, null, girinti);
+}catch (e){
+    hmbh("JSON Yazılamadı: " + e.message, "ssjsonyaz");
+    return null;
+}
+        }
+        if(ifade[0] == "ssbune"){
+            var a = argkarae(ifade, 1);
+            var komut = String(a[0] || "").replace(/"/g, "");
+            if(komut == "ssyazdır") return "Konsol'a yazı yazdırır.";
+            if(komut == "ssuyar") return "Ekranda pencere çıkar yani alert() gibi birşey.";
+            if(komut == "sseğer") return "If kodu işte.";
+            if(komut == "ssdöngü") return "Döngü oluşturur.Bunu derleyince/yorumladıktan hemen sonra farenizi bence sayfa kapatma tuşuna götürün nolur nolmaz.He firefox kullanın chrome'da..";
+            if(komut == "ssdeğişken") return "Değişken için";
+            if(komut == "sscetvel") return "Uzunluk ölçmek için.";
+            if(komut == "ssata") return "Değişkene değer atarsın.";
+            if(komut == "sskontaekle") return "Kum havuzuna ekler.";
+            if(komut == "sstagekle") return "html tag'i ekler.";
+            if(komut == "ssmetinver") return "Tag'e metin verir.";
+            if(komut == "ssfonksiyon") return "Fonksiyon yaparsın.";
+            return komut + " Kodu herhalde vardır ancak tanımını yazmamıştırım.Senin kodda varsa çok takma kalsın.";
+        }
+        if(ifade[0] == "ssurienkod"){
+var a = argkarae(ifade, 1);
+try{
+    return encodeURIComponent(String(a[0]) != null ? a[0] : "");
+}catch (e){
+    hmbh("Hata mesajı işte: " + e.message, "ssurienkod");
+    return e.message;
+}
+        }
+        if(ifade[0] == "sshizlibakesit"){
+var a = argkarae(ifade, 1);
+if(a[0] == NaN && a[1] == NaN){
+    return "NaN NaN'a eşittir.";
+}
+if(a[0] == a[1]){
+    return a[2];
+}
+else{
+    return a[3];
+}
+        }
+        if(ifade[0] == "sshizlibakesitdegil"){
+var a = argkarae(ifade, 1);
+if(a[0] == NaN && a[1] == NaN){
+    return "NaN NaN'a eşittir.";
+}
+if(a[0] != a[1]){
+    return a[2];
+}
+else{
+    return a[3];
+}
+        }
+        if(ifade[0] == "sshizlibakbuyuk"){
+var a = argkarae(ifade, 1);
+if(a[0] > a[1]){
+    return a[2];
+}
+else{
+    return a[3];
+}
+        }
+        if(ifade[0] == "sshizlibakkucuk"){
+var a = argkarae(ifade, 1);
+if(a[0] < a[1]){
+    return a[2];
+}
+else{
+    return a[3];
+}
+        }
+        if(ifade[0] == "ssuricoz"){
+var a = argkarae(ifade, 1);
+try{
+    return decodeURIComponent(String(a[0]) != null ? a[0] : "");
+}catch (e){
+    hmbh("Hata mesajı işte2: " + e.message, "ssuricoz");
+    return e.message;
+}
+        }
+        if(ifade[0] == "ssduzenli"){
+            var a = argkarae(ifade, 1);
+            var metin = a[0] || "";
+            var desen = a[1] || "";
+            var bayrak = a[2] || "";
+            try{
+var re = new RegExp(desen, bayrak);
+return re.test(metin);
+            }catch(e){
+hmbh("Regex Hatası: " + e.message, "ssduzenli");
+return e.message;
+            }
+        }
+        if(ifade[0] == "ssbildirim"){
+            var a = argkarae(ifade, 1);
+            var baslik = String(a[0] ?? "Başlıksız");
+            var mesaj = String(a[1] ?? "yazısız");
+            try{
+                if(Notification.permission == "granted"){
+                    new Notification(baslik, {body: mesaj});
+                }else{
+                    Notification.requestPermission().then(function(izin){
+                        if(izin == "granted") new Notification(baslik, {body: mesaj});
+                    });
+                }
+                return "bildirim gönderildi.";
+            }catch(e){
+                hmbh("Bildirim gönderilemedi: " + e.message, "ssbildirim");
+                return e.message;
+            }
+        }
+        if(ifade[0] == "ssbaslikver"){
+            var a = argkarae(ifade, 1);
+            document.title = a[0];
+            return a;
+        }
+        if(ifade[0] == "ssdosyaindir"){ //js ile 7 satırlık şeyi neredeyse hiç ince ayar kaybı olmadan 1 satıra indiren kod :D
+            var a = argkarae(ifade, 1);
+            var dosyaa = String(a[0] ?? "Başlıksız_Dosya.txt");
+            var icrk = String(a[1] ?? "İçerik yok.");
+            try{
+                var blb = new Blob([icrk], {type: "text/plain"});
+                var url = URL.createObjectURL(blb);
+                var link = document.createElement("a");
+                link.href = url;
+                link.download = dosyaa;
+                link.click();
+                URL.revokeObjectURL(url);
+                return dosyaa + " indirildi.";
+            }catch(e){
+                hmbh("Dosya indirilemedi.Hata mesajı: " + e.message, "ssdosyaindir");
+                return e.message;
+            }
+        }
+        if(ifade[0] == "sstamekran"){
+            try{
+                document.documentElement.requestFullscreen();
+                return "tam ekran açıldı.";
+            }catch(e){
+                hmbh("Tam Ekran Açılamadı: " + e.message, "sstamekran");
+                return e.message;
+            }
+        }
+        var sesler = [];
+        if(ifade[0] == "ssses"){ //hata işleri yok bunda ama fark edilmez çokta gerekmez yani kimse ssses'te hata yakalamaz.
+            var a = argkarae(ifade, 1);
+            var url = String(a[0]);
+            var ses1 = a[1] != undefined ? Number(a[1]) : 1;
+            var isim = String(a[2]);
+            var ses = new Audio(url);
+            ses.volume = Math.max(0, Math.min(1, ses1));
+            ses.play();
+            if(isim) sesler = ses;
+            return "çalıyor ses";
+        }
+        if(ifade[0] == "sssus"){
+            var a = argkarae(ifade, 1);
+            var isim2 = String(a[0]);
+            var ses2 = sesler[isim2];
+            ses2.pause();
+            return isim2 + " duraklatıldı.";
+        }
+        if(ifade[0] == "ssyazdırifade"){
+            var a = argkarae(ifade, 1);
+            console.log(a[0]);
+            return a[0];
+        }
+        if(ifade[0] == "ssuyarifade"){
+            var a = argkarae(ifade, 1);
+            alert(a[0]);
+            return a[0];
+        }
+        if(ifade[0] == "ssduzenliara"){
+            var a = argkarae(ifade, 1);
+            var metin = a[0] || "";
+            var desen = a[1] || "";
+            var bayrak = a[2] || "";
+            try{
+var re = new RegExp(desen, bayrak);
+var eslesme = metin.match(re);
+return eslesme;
+            }catch(e){
+hmbh("Regex arama Hatası: " + e.message + " bu işte hata mesajı", "ssduzenliara");
+return e.message;
+            }
+        }
+        if(ifade[0] == "ssduzenliparcala"){
+            var a = argkarae(ifade, 1);
+            var metin = a[0] || "";
+            var desen = a[1] || "";
+            var bayrak = a[2] || "";
+            try{
+return metin.split(new RegExp(desen, bayrak));
+            }catch(e){
+hmbh("Regex parçalama Hatası: " + e.message + " bu işte hata mesajı", "ssduzenliparcala");
+return e.message;
+            }
+        }
+        if(ifade[0] == "ssdikdortgenciz"){
+            var a = argkarae(ifade, 1);
+            var tuval = a[0], ctx = tuval.getContext("2d");
+            ctx.fillStyle = a[5] || "black";
+            ctx.fillRect(a[1],a[2],a[3],a[4]);
+            var nesne = {__tp: "4gen", tvl: tuval, x:a[1], y: a[2], w:a[3], h:a[4], renk:a[5] || "black"};
+            nesne.toString = function() {return "Dikdörtgen Çizildi.";};
+            return nesne;
+        }
+        if(ifade[0] == "sskonumdegistir"){
+            var ad = ifade[2];
+            var nesne = dgsknlr[ad];
+            var yx = dgsknlr[ifade[4]] != undefined ? dgsknlr[ifade[4]] : Number(ifade[4]);
+            var yy = dgsknlr[ifade[6]] != undefined ? dgsknlr[ifade[6]] : Number(ifade[6]);
+            var ctx = nesne.tvl.getContext("2d");
+            ctx.clearRect(nesne.x, nesne.y, nesne.w, nesne.h);
+            nesne.y = yy;
+            nesne.x = yx;
+            ctx.fillStyle = nesne.renk;
+            ctx.fillRect(nesne.x, nesne.y, nesne.w, nesne.h);
+            return "Konum Elhamdülillah Değiştirildi.Konum: " + nesne.x + " - " + nesne.y;
+        }
+        if(ifade[0] == "sstuvaltemizle"){
+            var a = argkarae(ifade, 1);
+            var tuval = a[0], ctx = tuval.getContext("2d");
+            ctx.clearRect(0, 0, tuval.width, tuval.height);
+            return "tuval silindi.";
+        }
+        if(ifade[0] == "ssalansil"){
+            var a = argkarae(ifade, 1);
+            var tuval = a[0], ctx = tuval.getContext("2d");
+            ctx.clearRect(a[1], a[2], a[3], a[4]);
+            return "alan silindi.";
+        }
+        if(ifade[0] == "ssduzenlidegistir"){
+            var a = argkarae(ifade, 1);
+            var metin = a[0] || "";
+            var desen = a[1] || "";
+            var yeni = a[2] || "";
+            var bayrak = a[3] || "";
+            try{
+var re = new RegExp(desen, bayrak);
+return metin.replace(re, yeni);
+            }catch(e){
+hmbh("Regex değiştirme Hatası: " + e.message + " bu işte hata mesajı", "ssduzenlidegistir");
+return e.message;
+            }
+        }
+        if(ifade[0] == "sscetvel"){
+            var val = ifade[2];
+            var deger = dgsknlr[val] != undefined ? dgsknlr[val] : val;
+            if(Array.isArray(deger)){
+                return deger.length;
+            }
+            return String(deger).length;
+        }
+        if(ifade[0] == "sstipebak"){
+            var a = argkarae(ifade, 1);
+            var deger = a[0];
+            if(deger == null) return "değersiz varlık";
+            if(deger == undefined) return "tanınmadık kişi";
+            if(Array.isArray(deger)) return "[,](X)→⌞→⌝(:))"; //bu ilk diziydi adı ancak artık dizi değil [,](X)→⌞→⌝(:)) döndürüyor .d Mağara diliyle yazılmışta sizde dizi kullanmayı verin.He diziler yine işe yarıyorda v2.3'te ekledikte baya işe yarıyor.
+            if(typeof deger == "number" && !isNaN(deger)) return "sayı";
+            if(typeof deger == "string") return "metin";
+            return typeof deger;
+        }
+        if(ifade[0] == "ssnanmi"){
+var a = argkarae(ifade, 1);
+var deger = a[0];
+return isNaN(deger) ? "evt" : "yk";
+        }
+        if(ifade[0] == "ssyerdegistir"){
+var ad1 = ifade[2];
+var ad2 = ifade[4];
+var gecici = dgsknlr[ad1];
+dgsknlr[ad1] = dgsknlr[ad2];
+dgsknlr[ad2] = gecici;
+return "yeni değerleri atandı.";
+        }
+        if(ifade[0] == "ssyeritekrarla"){ //re-place .d
+var a = argkarae(ifade, 1);
+return String(a[0]).replace(a[1], a[2]);
+        }
+        if(ifade[0] == "sskırp"){
+var a = argkarae(ifade, 1);
+return String(a[0]).trim();
+        }
+        if(ifade[0] == "ssilgilenmiyorum"){ //büyük-küçük harf ilgilemiyorum .d
+var a = argkarae(ifade, 1);
+return String(a[0]).toLowerCase();
+        }
+        if(ifade[0] == "ssiçerir"){
+var a = argkarae(ifade, 1);
+return String(a[0]).includes(a[1]) ? 1 : 0;
+        }
+        if(ifade[0] == "sssayiyacevir"){
+            var val = ifade[2];
+            var deger = dgsknlr[val] != undefined ? dgsknlr[val] : val;
+            return Number(deger);
+        }
+        if(ifade[0] == "sscarptimi"){
+            var a = argkarae(ifade, 1);
+            var x1=a[0], y1=a[1], w1=a[2], h1=a[3];
+            var x2=a[4], y2=a[5], w2=a[6], h2=a[7];
+            return (x1 < x2+w2 && x1+w1 > x2 && y1 < y2+h2 && y1+h1 > y2);
+        }
+        if(ifade[0] == "ssmetnecevir"){
+            var val = ifade[2];
+            var deger = dgsknlr[val] != undefined ? dgsknlr[val] : val;
+            return String(deger);
+        }
+        //mevlid kandiliniz mübarek olsun - 12 rebiülevvel 1448
+    if (ifade[0] == "sssaat") return new Date().getHours();
+    if (ifade[0] == "ssay") return new Date().getMonth();
+    if (ifade[0] == "ssdakika") return new Date().getMinutes();
+    if (ifade[0] == "sssaniye") return new Date().getSeconds();
+    if (ifade[0] == "ssmilisaniye") return new Date().getMilliseconds();
+    if (ifade[0] == "ssgun") return new Date().getDay();
+    if (ifade[0] == "sstamami") return new Date().getDate();
+    if (ifade[0] == "ssmiladiyil") return new Date().getFullYear();
+    if (ifade[0] == "sshatamnerde") return "Bilmiyorum.";
+    if (ifade[0] == "ssckodu") return '#import <stdio.h> \n int main(){\nprintf("Selamun Aleyküm dünya");\n}';
+    if (ifade[0] == "ssjskodu") return 'console.log("Selamun Aleyküm dünya")';
+    if (ifade[0] == "ssyazma") return "yazmadım say.";
+    if (ifade[0] == "sshazırkod") return "burda hazır kod var gibi düşün";
+    if (ifade[0] == "ssosyap") return "merhabadunyaosolustur(); he böyle bir kod var gibi düşün.";
+    if (ifade[0] == "sshaberler") return "Haber: haber var gibi düşün.";
+    if (ifade[0] == "ssversiyon") return "SeairScript " + document.getElementById("versiyon").textContent; //artık uğraşmak yerine elhamdülillah direkt oluyor.Otomatikleşti yani .d
+    if (ifade[0] == "ssuseragent") return navigator.userAgent;
+    if (ifade[0] == "sshatamibul") return "Hatan: " + mesaj2;
+    if (ifade[0] == "sskoynerede") return "bizim köy mü?Ordu + Kızılelma.";
+    if (ifade[0] == "sshuzeyfekim") return "o arkadaşım.Sınıf Başkanı Olma Similatör'deki ana karakter.";
+    if (ifade[0] == "sscokrandom") return Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random();
+    if (ifade[0] == "ssplatform") return navigator.platform;
+    if (ifade[0] == "ssdil") return navigator.language;
+    if (ifade[0] == "sstersbolu") return "\\";
+    if (ifade[0] == "ssbackspace") return "\b";
+    if (ifade[0] == "ssdikeysekme") return "\v";
+    if (ifade[0] == "ssstringatkacisile") return "\"";
+
+    if (ifade[0] == "ssyil") {
+        var miladi = new Date().getFullYear();
+        var mdnh1 = miladi - 621;
+        var mdnh2 = mdnh1 / 33;
+        var mdnh3 = Math.ceil(mdnh2);
+        return mdnh3 + mdnh1;
+    }
+    if (ifade[0] == "ssasarcigikopyala") {
+        var a = argkarae(ifade, 1);
+        var metin = String(a[0] ?? "");
+        try{
+            navigator.clipboard.writeText(metin);
+            return metin;
+        }catch(e){
+            hmbh("Metin kopyalanamadı hata mesajı: " + e.message, "ssasarcigikopyala");
+            return e.message;
+        }
+    }
+    if (ifade[0] == "ssderinkopyala") {
+        var a = argkarae(ifade, 1);
+        try{
+            return JSON.parse(JSON.stringify(a[0]));
+        }catch(e){
+            hmbh("Kopyalanamadı: " + e.message, "ssderinkopyala");
+            return e.message;
+        }
+    }
+
+    if (ifade[0] == "ssrastgeledevlet") {
+        var ismlr = ["Osmanlı", "Bizans", "Yunanistan", "Göktürkler", "Memlükler", "Abbasiler", "Emeviler", "Kırım Hanlığı", "Rusya", "Moskova Knezliği", "Türkiye", "Azerbaycan", "Yarkent Hanlığı", "1. Doğu Türkistan Cumhuriyeti", "Pakistan", "Mısır", "Fransa", "Kutsal Roma Cermen", "Venedik", "Raşidün Halifeliği", "Selçuklu", "İtalya", "Büyük Britanya", "ABD", "Suudi Arabistan", "Fatımiler", "Karamanoğulları", "Dulkadiroğulları", "Roma", "Hun İmparatorluğu", "Germiyanoğulları", "Kadı Burhaneddin"];
+        return ismlr[Math.floor(Math.random() * ismlr.length)];
+    }
+
+    var ONCELIK = {
+        "+": 1,
+        "-": 1,
+        "*": 2,
+        "/": 2,
+        "%": 2,
+        "#^#": 2,
+        "◂_₺": 3,
+        "▸_₺": 3,
+        "#&#": 1,
+        "#|#": 0,
+        "!◂_₺": 3,
+        "^*": 2,
+        "?": 1,
+        ".d": 2,
+        "]_([-": 1,
+        "..*": 1,
+        "..#": 1,
+        ":+": 1,
+        ":|": 0,
+        "&.":4,
+        "?✓":1,
+        "?!=":1
+        };
+    var i = 0;
+    var sni = null;
+
+    function parsePrimary() {
+        if (i >= ifade.length) return null;
+
+        if (ifade[i] == "(") {
+            i++;
+            var deger = parseExpression(0);
+            if (ifade[i] == ")") i++;
+            return deger;
+        }
+        if (ifade[i] == "~" && i + 1 < ifade.length) {
+            i++;
+            return ~parsePrimary();
+        }
+        if (ifade[i] == "!-" && i + 1 < ifade.length) {
+            i++;
+            return !parsePrimary();
+        }
+        if (ifade[i] == "@s" && i + 1 < ifade.length) {//@s ne yav? Perl mi .d
+            i++;
+            return parseFloat(parsePrimary());
+        }
+        if (ifade[i] == "@m" && i + 1 < ifade.length) {
+            i++;
+            return parsePrimary().toString();
+        }
+        if (ifade[i] == "_₺_" && i + 1 < ifade.length) {
+            i++;
+            var deger = String(parsePrimary());
+            var obj = { __tip: "krktr", krkt: deger.split("")};
+            obj.toString = function(){ return this.krkt.join("")};
+            obj.valueOf = function(){ return this.krkt.join("")};
+            return obj;
+        }
+        if (ifade[i] == "-" && i + 1 < ifade.length) {
+            i++;
+            return -parsePrimary();
+        }
+
+        var tok = ifade[i++];
+        sni = (/^[\wıİşŞğĞüÜöÖçÇ]+$/.test(tok) && isNaN(tok)) ? tok : null;
+        
+        if (dgsknlr[tok] !== undefined) return dgsknlr[tok];
+        
+        if (!isNaN(tok) && tok !== "") return Number(tok);
+        
+        return String(tok).replace(/^['"]|['"]$/g, "");
+    }
+
+    function parseExpression(minOncelik) {
+        var bsl = i;
+        var sol = parsePrimary();
+        var sli = (i - bsl === 1) ? sni : null;
+
+        while (i < ifade.length) {
+            var op = ifade[i];
+            var oncelik = ONCELIK[op];
+            if (oncelik === undefined || oncelik < minOncelik) break;
+
+            i++;
+            var sag = (op == "?!=") ? parseExpression(0) : parseExpression(oncelik + 1);
+
+            if (op === "+") sol = sol + sag;
+            else if (op === "-") sol = sol - sag;
+            else if (op === "*") sol = sol * sag;
+            else if (op === "/"){
+                if(sol == 0 && sag == 0){
+                sol = 50; //Neden mi?52 ve 58 memleketlerimin plakaları onların ortalamasının yuvarlaması.normalde 55 ediyor ama bilerek aşağıya yuvarladım.
+                }
+                else if(sol == 1 && sag == 0){
+                sol = 50;
+                }
+                else if(sol == 0 && sag == 1){
+                sol = 50;
+                }
+                else if(sol == 2 && sag == 0){
+                sol = 50;
+                }
+                else if(sol == 0 && sag == 2){
+                sol = 50;
+                }
+                else{
+                sol = sol / sag;
+                }
+        }
+            else if (op === "%") sol = sol % sag;
+            else if (op === "◂_₺") sol = sol << sag;
+            else if (op === "▸_₺") sol = sol >> sag;
+            else if (op === "#^#") sol = sol ^ sag;
+            else if (op === "#|#") sol = sol | sag;
+            else if (op === "#&#") sol = sol & sag;
+            else if (op === "^*") sol = sol ** sag;
+            else if (op === "!◂_₺") sol = sol; /*mantık:
+            ◂_₺ operatörü kaydırıyor.! ise yapmamak demek.!◂_₺ diyincede kaydırma diyoruz.Eee kaydırmayınca ne yapcak?HİÇ BİRŞEY .d
+            */
+            else if(op == "?") sol = (sol != undefined && sol != null) ? sol : sag;
+            else if(op == ".d") sol = Array.isArray(sol) ? sol.join(typeof sag == "string" ? sag: " ") : sol;
+            else if(op == "]_([-") sol = (typeof sol == "string" && typeof sag == "string") ? sol.replace(sag, "") : sol;
+            else if(op == "..*") sol = String(sol).repeat(Math.max(0, Number(sag) || 0));
+            else if(op == "..#") {
+    var s = (Number(sol) | 0) ^ 0x9E3779B9;
+    var g = (Number(sag) | 0) ^ 0x517CC1B7;
+    for (var j1 = 0; j1 < 50; j1++) {
+        var kydrm = (g & 31) || 1;
+        var krsm = (~s << kydrm) ^ (~s >>> kydrm) ^ (s & g) ^ (s | g);
+        krsm = ((krsm % 1000000007) + 1000000007) % 1000000007;
+        s = g;
+        g = krsm;
+    }
+    sol = g;
+}
+else if(op == "?!=") { //bir tık ruby'deki ||='e benziyor ama daha mantıklısı bu.
+    var mvcd = (sli != null) ? dgsknlr[sli] : sol;
+    if(!mvcd){
+        sol = sag;
+        if(sli != null) dgsknlr[sli] = sag;
+    }else{
+        sol = mvcd;
+    }
+}
+else if(op == "&.") { //bu işi ruby iyi yapıyormuş.Şaka yaptım sırf öylesine aldım bu operatörü.
+if(sol == null || sol == undefined){
+    sol = null;
+    while(i < ifade.length && ONCELIK[ifade[i]] !== undefined) i++;
+}else{
+    var prop = sag;
+    sol = (typeof sol === "object" && sol != null) ? sol[prop] : null;
+}
+}
+else if(op == "?✓") {
+if(Array.isArray(sag)){
+    sol = sag.indexOf(sol) != -1;
+}
+else if(typeof sag == "string"){
+    sol = sag.indexOf(String(sol)) != -1;
+}
+else{
+    sol = false;
+}
+if(sol){
+    sol = "evt";
+}
+if(!sol){
+    sol = "yk";
+}
+//siz evt ve yk'den kurtulacağınızı mı sandınız?
+}
+else if(op == ":+") sol = Boolean(sol) && Boolean(sag);
+else if (op == ":|") sol = Boolean(sol) || Boolean(sag);
+sli = null;
+        }
+        return sol;
+    }
+
+    return parseExpression(0);
+}
+
+function TKNRZ(kd) {
+    kd = kd.replace(/>>.*$/gm, "");
+    return kd.match(/_₺_|[\wıİşŞğĞüÜöÖçÇ]+|\d+\.\d+|\(\*(?:[^*]|\*(?!\)))*\*\)|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|==|!=|>=|<=|&&|◂_₺|\+=|\^\*|\!◂_₺|▸_₺|\@s|@m|\#\^\#|\#\|\#|\#\&\#|\?✓|\?!=|\?|\.d|\]_\(\[-|\.\.\*|\.\.#|:\+|:\||!-|\\n|\\"|&\.|\S/g) || [];
+}
+function parseBlock(tokens) {
+    var body = [];
+    if (tokens[0] == "{") {
+        tokens.shift();
+        while (tokens.length > 0 && tokens[0] != "}") {
+            var nd = parseStatement(tokens);
+            if (nd) body.push(nd);
+        }
+        if (tokens[0] == "}") tokens.shift();
+    }
+    return body;
+}
+
+function parseStatement(tokens) {
+    if (tokens.length === 0) return null;
+    var tok = tokens.shift();
+
+    if (tok == "ssyazdır") {
+        tokens.shift(); // (
+        var vlu = tokens.shift();
+        tokens.shift(); // )
+        return { type: "PrintStatement", value: vlu.replace(/^['"]|['"]$/g, "") };
+    }
+    if (tok == "sshatamesaji") {
+        tokens.shift();
+        var vlu = tokens.shift();
+        tokens.shift();
+        return { type: "hataa", value: vlu.replace(/^['"]|['"]$/g, "") };
+    }
+
+    if (tok == "ssuyar") {
+        tokens.shift();
+        var vlu = tokens.shift();
+        tokens.shift();
+        return { type: "AlertStatement", value: vlu.replace(/^['"]|['"]$/g, "") };
+    }
+
+    if (tok == "ssdeğişken" || tok == "ssata") {
+        var ism = tokens.shift();
+        tokens.shift();
+        var ifd = [];
+        while (tokens.length > 0 && tokens[0] != ";" && tokens[0] != "}") {
+            ifd.push(tokens.shift());
+        }
+        if (tokens[0] == ";") tokens.shift();
+        return { type: tok == "ssdeğişken" ? "VariableDeclaration" : "Assignment", name: ism, value: ifd };
+    }
+
+    if (tok == "sseğer") {
+        tokens.shift(); // (
+        var vlu1 = tokens.shift();
+        var vlu2 = tokens.shift();
+        var vlu3 = tokens.shift();
+        tokens.shift(); // )
+        var body = parseBlock(tokens);
+        var elseBody = null;
+        if (tokens[0] == "sseğerinzıttı") {
+            tokens.shift();
+            if(tokens[0] == "sshayraevet"){
+                tokens.shift();
+                var elseifn = parseStatement(tokens);
+                elseBody = [elseifn];
+            }else{
+            elseBody = parseBlock(tokens);
+            }
+        }
+        return {
+            type: "IfStatement",
+            left: vlu1,
+            op: vlu2,
+            right: vlu3.replace(/^['"]|['"]$/g, ""),
+            body: body,
+            elseBody: elseBody
+        };
+    }
+
+    if (tok == "ssdöngü") {
+        tokens.shift();
+        var vlu1 = tokens.shift();
+        var vlu2 = tokens.shift();
+        var vlu3 = tokens.shift();
+        tokens.shift();
+        var body = parseBlock(tokens);
+        return { type: "WhileStatement", left: vlu1, op: vlu2, right: vlu3.replace(/"/g, ""), body: body };
+    }
+
+    if (tok == "ssfonksiyon") {
+        var isim = tokens.shift();
+        tokens.shift(); // (
+        var params = [];
+        while (tokens.length > 0 && tokens[0] != ")") {
+            if (tokens[0] != ",") params.push(tokens.shift());
+            else tokens.shift();
+        }
+        tokens.shift(); // )
+        var body = parseBlock(tokens);
+        return { type: "FunctionDeclaration", name: isim, params: params, body: body };
+    }
+
+    if (tok == "ssdöndür") {
+        var ifd = [];
+        while (tokens.length > 0 && tokens[0] != ";" && tokens[0] != "}") {
+            ifd.push(tokens.shift());
+        }
+        if (tokens[0] == ";") tokens.shift();
+        return { type: "ReturnStatement", value: ifd };
+    }
+    if (tok == "sshavayafırlat") {
+        tokens.shift();
+        var ifd = [];
+        while (tokens[0] != ";") {
+            ifd.push(tokens.shift());
+        }
+        tokens.shift();
+        return { type: "hataucuran", value: ifd };
+    }
+
+    if (tok == "ssmatematik") {
+        tokens.shift();
+        var metod = tokens.shift();
+        tokens.shift();
+        var vlu = null;
+        if (tokens[0] != ")") vlu = tokens.shift();
+        tokens.shift();
+        return { type: "MathCall", method: metod, value: vlu ? vlu.replace(/^['"]|['"]$/g, "") : null };
+    }
+    if (tok == "ssparcala") {
+        if(tokens[0] == ";") tokens.shift();
+        return { type: "Parcala"};
+    }
+
+    if (tok == "sshtmlver") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var html = tokens.shift();
+        tokens.shift();
+        return { type: "SetHTML", element: el, html: html };
+    }
+    if (tok == "ssmetinver") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var html = tokens.shift();
+        tokens.shift();
+        return { type: "MetinVer", element: el, html: html };
+    }
+    if (tok == "ssbağlantı" || tok == "ssbaglanti"){
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var url = tokens.shift();
+        tokens.shift();
+        return { type: "Baglantiver", element: el, url: url };
+    }
+    if (tok == "sskaynak") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var src = tokens.shift();
+        tokens.shift();
+        return { type: "Kaynakver", element: el, src: src.replace(/^['"]|['"]$/g, "") };
+    }
+
+    if (tok == "ssekle") {
+        tokens.shift();
+        var parent = tokens.shift();
+        tokens.shift();
+        var child = tokens.shift();
+        tokens.shift();
+        return { type: "Append", parent: parent, child: child };
+    }
+    if (tok == "sskontaekle") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        return { type: "KontAppend", element: el };
+    }
+    if (tok == "ssstilyaz") {
+        tokens.shift();var css = tokens.shift();tokens.shift();
+        return { type: "cssyazari", css: css };
+    }
+    if (tok == "<" && tokens[0] == "blink" && tokens[1] == ">") {
+        tokens.shift();
+        tokens.shift();
+        var el = tokens.shift();
+        if(tokens[0] == ";") tokens.shift();
+        return { type: "Blinkiste", element: el };
+    }
+    if (tok == "ssbaglantiyaat") {
+        tokens.shift();
+        var link = tokens.shift();
+        tokens.shift();
+        return { type: "Baglantiat", link: link };
+    }
+
+    if (tok == "ssstilver") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var ozel = tokens.shift();
+        tokens.shift();
+        var deger = tokens.shift();
+        tokens.shift();
+        return { type: "SetStyle", element: el, property: ozel.replace(/^['"]|['"]$/g, ""), value: deger.replace(/^['"]|['"]$/g, "") };
+    }
+    if (tok == "ssdizinegir") {
+        tokens.shift();
+        var dizi = tokens.shift();
+        tokens.shift();
+        var indeks = tokens.shift();
+        tokens.shift();
+        var deger = tokens.shift();
+        tokens.shift();
+        return { type: "Diziyegir", dizi: dizi, indeks: indeks, deger: deger };
+    }
+    if (tok == "ssdiziyeekle") {
+        tokens.shift();
+        var dizi = tokens.shift();
+        tokens.shift();
+        var deger = tokens.shift();
+        tokens.shift();
+        return { type: "Diziekle", dizi: dizi, deger: deger };
+    }
+    if (tok == "ssdizidenkov") {
+        tokens.shift();
+        var dizi = tokens.shift();
+        tokens.shift();
+        return { type: "Dizikov", dizi: dizi, };
+    }
+
+    if (tok == "sstagsil") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        return { type: "ClearElement", element: el };
+    }
+    if (tok == "ssgetir") {
+        tokens.shift();
+        var url = tokens.shift();
+        tokens.shift();
+        return { type: "cagiran", url: url.replace(/^['"]|['"]$/g, "") };
+    }
+    if (tok == "ssagetir") {
+        tokens.shift();
+        var url = tokens.shift();
+        tokens.shift();
+        var fn = tokens.shift();
+        tokens.shift();
+        if (tokens[0] == ";") tokens.shift();
+        return { type: "acagiran", url: url, fn: fn };
+    }
+    if (tok == "ssyukle" || tok == "ssyükle") {
+        tokens.shift();
+        var url = tokens.shift();
+        tokens.shift();
+        return { type: "sscagiran", url: url.replace(/^['"]|['"]$/g, "") };
+    }
+
+    if (tok == "sszamanlitekrar") {
+        tokens.shift();
+        var sure = tokens.shift();
+        tokens.shift();
+        var body = parseBlock(tokens);
+        return { type: "IntervalStatement", delay: sure, body: body };
+    }
+
+    if (tok == "ssvaktinde") {
+        tokens.shift();
+        var sure = tokens.shift();
+        tokens.shift();
+        var body = parseBlock(tokens);
+        return { type: "TimeoutStatement", delay: sure, body: body };
+    }
+    if (tok == "sshuzeyfeyibul") { //arkadaşıma küçük bir jest :)
+        tokens.shift();
+        tokens.shift();
+        var dizi = tokens.shift();
+        tokens.shift();
+        var aranan = tokens.shift();
+        tokens.shift();
+        if(tokens[0] == ";") tokens.shift();
+        return { type: "Bul", dizi: dizi, aranan: aranan };
+    }
+
+    if (tok == "sstikla") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var fn = tokens.shift();
+        tokens.shift();
+        return { type: "ClickEvent", element: el, handler: fn };
+    }
+    if (tok == "sssurukle") {
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var fn = tokens.shift();
+        tokens.shift();
+        return { type: "surukle", element: el, handler: fn };
+    }
+    if (tok == "sstusabas") {
+        tokens.shift();
+        var tus = tokens.shift();
+        tokens.shift();
+        var fn = tokens.shift();
+        tokens.shift();
+        if(tokens[0] == ";") tokens.shift();
+        return { type: "tusabas", tus: tus, fn: fn };
+    }
+    if (tok == "innerColor") { //bu troll.biri JS öğrenmeye niyetlenmişti zannettiki innerText gibi renk vermede ve innerColor dedi .d
+        tokens.shift();
+        var el = tokens.shift();
+        tokens.shift();
+        var renk = tokens.shift();
+        tokens.shift();
+        return { type: "InnerColor", element: el, renk: renk };
+    }
+
+    if (/^[a-zA-ZıİşŞğĞüÜöÖçÇ_][\wıİşŞğĞüÜöÖçÇ]*$/.test(tok) && tokens[0] == "(") {
+        tokens.shift(); // (
+        var args = [];
+        while (tokens.length > 0 && tokens[0] != ")") {
+            if (tokens[0] != ",") args.push(tokens.shift());
+            else tokens.shift();
+        }
+        tokens.shift(); // )
+        return { type: "FunctionCall", name: tok, args: args };
+    }
+    if (tok == "sskovala") {
+        var tryvucud = parseBlock(tokens);
+        var yakalavucud = null;
+        if(tokens[0] == "ssyakala"){
+            tokens.shift();
+            yakalavucud = parseBlock(tokens);
+        }
+        return { type: "kovala", tryvcd: tryvucud, yakalavcd: yakalavucud };
+    }
+    return null;
+}
+
+function PRS(tokens) {
+    var ast = { type: "Program", body: [] };
+    while (tokens.length > 0) {
+        var nd = parseStatement(tokens);
+        if (nd) ast.body.push(nd);
+    }
+    return ast;
+}
+
+function calistir(govde) {
+    for (var i = 0; i < govde.length; i++) {
+        var sonuc = calistirNode(govde[i]);
+        if (sonuc && sonuc.__return) {
+            return sonuc;
+        }
+        if (sonuc && sonuc.__break) {
+        return sonuc;
+    }
+    }
+}
+function est(sol, sag){
+    if(typeof sag === "number" && typeof sol === "number"){
+                if(Number.isNaN(sol) && Number.isNaN(sag)) return true; //Mantık yürütün: NaN:Belirsiz, ee belirsiz birşeyin değeri belirsizdir.Eee elimize ne kalıyor sadece belirsizlik string'i.Eee o zaman NaN belirsiz'dir ama string olarak düşünün.String'de kendine eşittir.Yani NaN == NaN = true'dir.
+                return sol === sag;
+            }
+            return sol === sag;
+}
+function kosulDegerlendir(left, op, right){
+    var sol = dgsknlr[left] !== undefined ? dgsknlr[left] : left;
+        var sag = dgsknlr[right] !== undefined ? dgsknlr[right] : right;
+        if (!isNaN(sol)) sol = Number(sol);
+        if (!isNaN(sag)) sag = Number(sag);
+
+        var sonuc = false;
+        if (op == "==") sonuc = est(sol, sag);
+        else if (op == "!=") sonuc = !est(sol, sag);
+        else if (op == ">") sonuc = sol > sag;
+        else if (op == "<") sonuc = sol < sag;
+        else if (op == ">=") sonuc = sol >= sag;
+        else if (op == "<=") sonuc = sol <= sag;
+        else if (op == "%") return sonuc = sol % sag;
+        else if (op == ":+") return sonuc = Boolean(sol) && Boolean(sag);
+        else if (op == ":|") return sonuc = Boolean(sol) || Boolean(sag);
+        return sonuc;
+}
+function cozArg(a){
+    if (dgsknlr[a] !== undefined) return dgsknlr[a];
+    if (!isNaN(a) && a !== "") return Number(a);
+    return String(a).replace(/^['"]|['"]$/g, "");
+}
+var hs1 = 0; //hata sayısı .d
+function hmbh(hata, suclu){ //çevirisi: HMBH: Hataya Mesajına Bakmakta Hatalısın
+hs1 += 1;
+if(hs1 >= 50){
+    console.error("Tebrik ederim.. 50'den fazla hatalı kod yazdın.He ek olarak: 404 - seairscriptbilgisi.seairsc Taşındı ve ya Silindi.");
+}
+var mesaj = "SeairScript Hatası: " + hata;
+if(suclu) mesaj += "\nSuçlu Kod: " + suclu;
+console.error(mesaj);
+var hataliste = ["SeairScript Hatası: Belki bir yerde yanlış yapmıştırsın? ", "Hadi be yaparsın", "ee hata bulması zor iş", "Buldun mu?", "İpucu: hata yapma", "tamam o kadar dalga geçtikte yazdıkta hatayı he", "Bak: function değil ssfonksiyon falan kullan dikkatli ol türkçe mi diye her şeye bak." + "ssrastgele değil direkt rastgele he"];
+var gicik = Math.floor(Math.random() * hataliste.length);
+console.error(hataliste[gicik]);
+}
+
+function calistirNode(nd) {
+    if (nd.type == "PrintStatement") {
+        var dgr = dgsknlr[nd.value] !== undefined ? dgsknlr[nd.value] : nd.value;
+        console.log(String(dgr));
+    }
+    if (nd.type == "hataa") {
+        var dgr = dgsknlr[nd.value] !== undefined ? dgsknlr[nd.value] : nd.value;
+        console.error(String(dgr));
+    }
+    else if (nd.type == "AlertStatement") {
+        var dgr = dgsknlr[nd.value] !== undefined ? dgsknlr[nd.value] : nd.value;
+        alert(String(dgr));
+    }
+    else if (nd.type == "VariableDeclaration" || nd.type == "Assignment") { //herşeye değişken sistemi yavaştan çöküyor mu?Hayır (inşAllah) herşeye + devri kapanıyor.30-40 satırda halledemeyeceğiniz şeyler yerine 5 satırda halloluncak şeyleri eklemek gerçekten keyifli -SeairScript'in dili olsaydı diyeceği ilk şey.
+    var hesaplanan;
+    if (Array.isArray(nd.value)) {
+        if (nd.value.length === 1 && isnanmi(nd.value[0])) {
+            hesaplanan = isnaneol(nd.value[0]);
+        } else if (nd.value.length === 3 && nd.value[1] === "+") {
+            var solTok = nd.value[0], sagTok = nd.value[2];
+            var solDeger = dgsknlr[solTok] !== undefined ? dgsknlr[solTok] : (isnanmi(solTok) ? isnaneol(solTok) : solTok);
+            var sagDeger = dgsknlr[sagTok] !== undefined ? dgsknlr[sagTok] : (isnanmi(sagTok) ? isnaneol(sagTok) : sagTok);
+
+            var solIsnan = solDeger && solDeger.__tip === "isnanetip";
+            var sagIsnan = sagDeger && sagDeger.__tip === "isnanetip";
+
+            if (solIsnan || sagIsnan) {
+                var metin = solIsnan ? solDeger.metin : sagDeger.metin;
+                var solSayi = solIsnan ? solDeger.sayi : Number(solDeger);
+                var sagSayi = sagIsnan ? sagDeger.sayi : Number(sagDeger);
+                hesaplanan = isnaneol("(*" + metin + " " + (solSayi + sagSayi) + "*)");
+            } else {
+                hesaplanan = ifadeHesapla(nd.value);
+            }
+        } else {
+            hesaplanan = ifadeHesapla(nd.value);
+        }
+    } else {
+        hesaplanan = ifadeHesapla(nd.value);
+    }
+        if(nd.type == "VariableDeclaration"){
+            cagriy(nd.name, hesaplanan);
+        }else{
+            dgsknlr[nd.name] = hesaplanan;
+        }
+}
+    else if (nd.type == "IfStatement") {
+        var sol = dgsknlr[nd.left] !== undefined ? dgsknlr[nd.left] : nd.left;
+        var sag = dgsknlr[nd.right] !== undefined ? dgsknlr[nd.right] : nd.right;
+        if (!isNaN(sol)) sol = Number(sol);
+        if (!isNaN(sag)) sag = Number(sag);
+
+        var sonuc = false;
+        if (nd.op == "==") sonuc = est(sol, sag);
+        else if (nd.op == "!=") sonuc = !est(sol, sag);
+        else if (nd.op == ">") sonuc = sol > sag;
+        else if (nd.op == "<") sonuc = sol < sag;
+        else if (nd.op == ">=") sonuc = sol >= sag;
+        else if (nd.op == "<=") sonuc = sol <= sag;
+        else if (nd.op == "%") sonuc = sol % sag;
+        else if (nd.op == ":+") sonuc = Boolean(sol) && Boolean(sag);
+        else if (nd.op == ":|") sonuc = Boolean(sol) || Boolean(sag);
+
+        if (sonuc) return calistir(nd.body);
+        else if (nd.elseBody) return calistir(nd.elseBody);
+    }
+    else if (nd.type == "WhileStatement") {
+        var kosul = function () {
+            var sol = dgsknlr[nd.left] !== undefined ? dgsknlr[nd.left] : nd.left;
+            var sag = dgsknlr[nd.right] !== undefined ? dgsknlr[nd.right] : nd.right;
+            if (!isNaN(sol)) sol = Number(sol);
+            if (!isNaN(sag)) sag = Number(sag);
+            if (nd.op == "==") return est(sol, sag);
+            else if (nd.op == "!=") return !est(sol, sag);
+            if (nd.op == ">") return sol > sag;
+            if (nd.op == "<") return sol < sag;
+            if (nd.op == ">=") return sol >= sag;
+            if (nd.op == "<=") return sol <= sag;
+            else if (nd.op == "%") return sol % sag;
+            return false;
+        };
+        while (kosul()) {
+            var r = calistir(nd.body);
+            if (r && r.__return) return r;
+            if (r && r.__break) break;
+        }
+    }
+    else if (nd.type == "FunctionDeclaration") {
+        fonksiyonlar[nd.name] = {
+            params: nd.params,
+            body: nd.body
+        };
+    }
+    else if (nd.type == "FunctionCall") {
+        var fn = fonksiyonlar[nd.name];
+        if (!fn) {
+            hmbh("Fonksiyon bulunamadı: " + nd.name, "ssfonksiyon");
+            return;
+        }
+
+        var cerce = {yerely: {}};
+        for (var i = 0; i < fn.params.length; i++) {
+        cerce.yerely[fn.params[i]] = dgsknlr[fn.params[i]];
+    }
+    cagri.push(cerce);
+        for (var i = 0; i < fn.params.length; i++) {
+            var param = fn.params[i];
+
+            var arg = nd.args[i];
+            var deger;
+            if (dgsknlr[arg] !== undefined) {
+                deger = dgsknlr[arg];
+            } else if (!isNaN(arg) && arg !== "") {
+                deger = Number(arg);
+            } else {
+                deger = String(arg).replace(/^"|"$/g, "");
+            }
+            dgsknlr[param] = deger;
+        }
+
+        var hm = calistir(fn.body);
+        var donen = (hm && hm.__return) ? hm.value : hm;
+
+        cagri.pop();
+    for (var p in cerce.yerely) {
+        var eski = cerce.yerely[p];
+        if (eski == undefined) {
+            delete dgsknlr[p];
+        } else {
+            dgsknlr[p] = eski;
+        }
+    }
+
+        return donen;
+    }
+    else if (nd.type == "ReturnStatement") {
+        var deger = ifadeHesapla(nd.value);
+        return { __return: true, value: deger };
+    }
+    else if (nd.type == "hataucuran") {
+        var mesaj = ifadeHesapla(nd.value);
+        throw new Error(mesaj);
+    }
+    else if (nd.type == "Parcala") {
+        return { __break: true};
+    }
+    else if (nd.type == "IntervalStatement") {
+        setInterval(function () {
+            calistir(nd.body);
+        }, Number(nd.delay));
+    }
+    else if (nd.type == "TimeoutStatement") {
+        setTimeout(function () {
+            calistir(nd.body);
+        }, Number(nd.delay));
+    }
+    else if (nd.type == "ClickEvent") {
+        var el = dgsknlr[nd.element];
+        var fn = fonksiyonlar[nd.handler];
+        if (el && fn) {
+            el.addEventListener("click", function (e) {
+                var kutu = el.getBoundingClientRect();
+                dgsknlr["tiklax"] = e.clientX - kutu.left;
+                dgsknlr["tiklay"] = e.clientY - kutu.top;
+                calistir(fn.body);
+            });
+        } else {
+            console.error("Fonksiyon veya element bulunamadı.");
+        }
+    }
+    else if (nd.type == "surukle") {
+        var el = dgsknlr[nd.element];
+        var fn = fonksiyonlar[nd.handler];
+        if (el && fn) {
+            var surukleme = "yk";
+            el.addEventListener("mousedown", function (e) {
+                surukleme = "evt";
+            });
+            el.addEventListener("mouseup", function (e) {
+                surukleme = "yk";
+            });
+            el.addEventListener("mousemove", function(e){
+                if(surukleme != "evt") return;
+                var kutu = el.getBoundingClientRect();
+                dgsknlr["farex"] = e.clientX - kutu.left;
+                dgsknlr["farey"] = e.clientY - kutu.top;
+                calistir(fn.body);
+            });
+        } else {
+            console.error("Fonksiyon veya element bulunamadı.");
+        }
+    }
+    else if (nd.type == "tusabas") {
+        var fn = fonksiyonlar[nd.fn];
+        var tus = String(nd.tus).replace(/^"|"$/g, "");
+        if (fn) {
+            document.addEventListener("keydown", function(e) {
+                if(tus == "herhangi" || e.key == tus){
+                    dgsknlr['btus'] = e.key;
+                    calistir(fn.body);
+                }
+            });
+        } else {
+            console.error("Fonksiyon veya element bulunamadı.");
+        }
+    }
+    else if (nd.type == "MathCall") {
+        var sonuc2 = matematikHesapla(nd.method, nd.value);
+        console.log(sonuc2);
+        dgsknlr["sonuc"] = sonuc2;
+    }
+    else if(nd.type == "Bul"){
+        var dizi = dgsknlr[nd.dizi];
+        if(!Array.isArray(dizi)){hmbh("Bu dizi değil: " + nd.dizi, "sshuzeyfeyibul");return;}
+        var aranan = dgsknlr[nd.aranan] != undefined ? dgsknlr[nd.aranan] : (isNaN(nd.aranan) ? nd.aranan.replace(/^"|"$/g,"") : Number(nd.aranan));
+        dgsknlr["sonuc"] = dizi.indexOf(aranan);
+    }
+    else if (nd.type == "InnerColor") {
+        var el = dgsknlr[nd.element];
+        if(el) el.style.color = nd.renk.replace(/^"|"$/g, "");
+    }
+    else if (nd.type == "SetHTML") {
+        var el = dgsknlr[nd.element];
+        if (el) {
+            var icerik = nd.html;
+            if (dgsknlr[icerik] !== undefined) {
+                icerik = dgsknlr[icerik];
+            } else {
+                icerik = String(icerik).replace(/^"|"$/g, "");
+            }
+            el.innerHTML = String(icerik);
+        }
+    }
+    else if(nd.type == "MetinVer"){
+        var el = dgsknlr[nd.element];
+        if (el){
+            var icerik = nd.html;
+            if(dgsknlr[icerik] != undefined){
+                icerik = dgsknlr[icerik];
+            }
+            else{
+                icerik = String(icerik).replace(/^"|"$/g, "");
+            }
+            el.textContent = icerik;
+        }
+    }
+    else if(nd.type == "Baglantiver"){
+        var el = dgsknlr[nd.element];
+        if (el){
+            var icerik = nd.url;
+            if(dgsknlr[icerik] != undefined){
+                icerik = dgsknlr[icerik];
+            }
+            else{
+                icerik = String(icerik).replace(/^"|"$/g, "");
+            }
+            el.href = icerik;
+        }
+    }
+    else if(nd.type == "Baglantiat"){
+        var link = nd.link;
+        if(dgsknlr[link] != undefined){
+            link = dgsknlr[link];
+        }
+        else{
+        link = String(link).replace(/^"|"$/g, "");
+        }
+        window.location.href = link;
+    }
+    else if(nd.type == "Kaynakver"){
+        var el = dgsknlr[nd.element];
+        if (el){
+                var deger = dgsknlr[nd.src] != undefined ? dgsknlr[nd.src] : nd.src;
+        el.src = deger;
+        }else{
+hmbh("Element Bulunamadı: " + nd.element, "sskaynak");
+            }
+    }
+    else if (nd.type == "Append") {
+        var parent = dgsknlr[nd.parent];
+        var child = dgsknlr[nd.child];
+        if (parent && child) parent.appendChild(child);
+    }
+    else if (nd.type == "cssyazari") {
+        var stil = document.createElement("style");
+        stil.textContent = nd.css.replace(/^"|"$/g, "");
+        document.head.appendChild(stil);
+    }
+    else if (nd.type == "cagiran") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", nd.url, false);
+        try{
+            xhr.send();
+            if(xhr.status == 200){
+                dgsknlr["__sonuc"] = xhr.responseText;
+                return xhr.responseText;
+            }else{
+                hmbh("HTTP Hatası: " + xhr.status + " Şu URL'de: " + nd.url, "ssgetir");
+            }
+        }catch(e){
+hmbh("İstek başarısız oldu: " + e.message + " Şu URL'de: " + nd.url, "ssgetir");
+return null;
+        }
+    }
+    else if (nd.type == "acagiran") {
+        var fn = fonksiyonlar[nd.fn];
+        var url = String(nd.url).replace(/^"|"$/g, "");
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+            if(xhr.status == 200){
+                dgsknlr["__sonuc"] = xhr.responseText;
+                if(fn) calistir(fn.body);
+            }else{
+                hmbh("HTTP Hatası: " + xhr.status + " Şu URL'de: " + nd.url, "ssagetir");
+            }
+        }
+    };
+    xhr.send();
+    }
+    else if (nd.type == "sscagiran") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", nd.url, false);
+        try{
+            xhr.send();
+            if(xhr.status == 200){
+                if(xhr.responseText.includes("ssgetir") || xhr.responseText.includes("ssyukle") || xhr.responseText.includes("ssgonder")){
+                    var onay = confirm("Bu kodun sağı solu belli olmayabilir ssyukle,ssgetir ve ya ssgonder komutları var.İstiyormusunuz?He birde bu zararlı olduğu anlamına gelmez.eval gibi komutlar işte bunlarda kötü değil aslen ancak kötü amaçla kullanabilirler.he yüklediğinizin başında turkum-webci falan varsa direkt açın o benim .d");
+                    if(onay){
+var tkns = TKNRZ(xhr.responseText);
+                var modast = PRS(tkns);
+                calistir(modast.body);
+                    }
+                    else{
+                        alert("Tamam açmadın.yani bu kadar bitti .d");
+                    }
+                }
+                else{
+                    var tkns = TKNRZ(xhr.responseText);
+                var modast = PRS(tkns);
+                calistir(modast.body);
+                }
+            }else{
+                hmbh("Kütüphane/Uygulama yüklenemedi: " + xhr.status + " Şu URL'de: " + nd.url, "ssyukle");
+            }
+        }catch(e){
+var msg = e.message;
+if(msg.toLowerCase().includes("cors") || msg.toLowerCase().includes("cross") || msg.toLowerCase().includes("origin") || msg.toLowerCase().includes("access-control") || msg.toLowerCase().includes("cross-origin") || msg.toLowerCase().includes("köken") || msg.toLowerCase().includes("aynı") || msg.toLowerCase().includes("occurred")){
+    msg = "Tarayıcı Kanunları: \n Madde 12: http:// daima file://'dan ÜSTÜNDÜR.Bu ilke 1996 yılından beri değiştirilemezdir.Başka bir şahsın domain'ine yahut da file:// http://'ye istek atamaz.Maddenin amacı kötü niyetli kişileri engellemek ve yazılımcıları üzmektir.Diğer adı Çapraz Köken İlkesi'dir.Neden http değil cors'tur.\n ek bilgi: bunu ben yapmadım tarayıcı yaptı yazı benim .d";
+}
+else if(msg.toLowerCase().includes("networkerror") || msg.toLowerCase().includes("failed to fetch") || msg.toLowerCase().includes("net::")){
+    msg = "Tarayıcı Kanunları:\nMadde 27:\nİnternet olmazsa veri çekilmez.";
+}
+else if(msg.toLowerCase().includes("security") || msg.toLowerCase().includes("permission") || msg.toLowerCase().includes("blocked")){
+    msg = "Tarayıcı Kanunları:\nMadde 43:\nKullanıcı sadece bizim izinlerimiz altında sitelere girebilir.";
+}
+else if(msg.toLowerCase().includes("url") || msg.toLowerCase().includes("invalid url") || msg.toLowerCase().includes("malformed")){
+    msg = "Tarayıcı Kanunları:\nMadde 79:\nKullanıcı URL'yi doğru girmek zorundadır.";
+}
+hmbh("İstek başarısız oldu: " + msg + " Şu URL'de: " + nd.url, "ssyukle");
+        }
+    }
+    else if (nd.type == "KontAppend") {
+        var el = dgsknlr[nd.element];
+        if (el) document.getElementById("kont1").appendChild(el);
+    }
+    else if (nd.type == "ClearElement") {
+        var el = dgsknlr[nd.element];
+        if (el && el.remove) el.remove();
+    }
+    else if (nd.type == "SetStyle") {
+        var el = dgsknlr[nd.element];
+        if (el) el.style.setProperty(nd.property, nd.value);
+        else hmbh("Element bulunamadı: " + nd.element, "ssstilver");
+    }
+    else if (nd.type == "Blinkiste") {
+    var el = dgsknlr[nd.element];
+    if (!el) { hmbh("Element bulunamadı: " + nd.element, "<blink>"); return; }
+    if (!document.getElementById("__ssblinkstil")) {
+        var s = document.createElement("style");
+        s.id = "__ssblinkstil";
+        s.textContent = "@keyframes ssblink { 50% { opacity: 0; } } .ss-blink { animation: ssblink 0.5s step-start infinite; }";
+        document.head.appendChild(s);
+    }
+    el.classList.add("ss-blink");
+}
+    else if (nd.type == "Diziyegir") {
+    var dizi = dgsknlr[nd.dizi];
+    if(!Array.isArray(dizi)){hmbh("Bu dizi değil: " + nd.dizi, "ssdizinegir"); return;}
+    var idx = dgsknlr[nd.indeks] != undefined ? Number(dgsknlr[nd.indeks]) : Number(nd.indeks);
+    var deger = dgsknlr[nd.deger] != undefined ? dgsknlr[nd.deger] : (isNaN(nd.deger) ? nd.deger : Number(nd.deger));
+    dizi[idx] = deger;
+}
+    else if (nd.type == "Diziekle") {
+        var dizi = dgsknlr[nd.dizi];
+        if(!Array.isArray(dizi)){hmbh("Bu dizi değil: " + nd.dizi, "ssdiziyeekle"); return;}
+        var deger = dgsknlr[nd.deger] != undefined ? dgsknlr[nd.deger] : Number(nd.deger);
+        dizi.push(deger);
+    }
+    else if (nd.type == "Dizikov") {
+        var dizi = dgsknlr[nd.dizi];
+        if(!Array.isArray(dizi)){hmbh("Bu dizi değil: " + nd.dizi, "ssdizidenkov"); return;}
+        dgsknlr["sonuc"] = dizi.pop();
+    }
+    else if (nd.type == "kovala") {
+try{
+    calistir(nd.tryvcd);
+}catch (e){
+    if(nd.yakalavcd){
+        dgsknlr["hatamisoyle"] = e.message;
+    calistir(nd.yakalavcd);
+    }
+}
+    }
+}
+function derleNode(nd) {//bence derlemeyin bir işe yaramıyor .d
+    if (nd.type == "PrintStatement") {
+        return `console.log(dgsknlr[${JSON.stringify(nd.value)}] !== undefined ? dgsknlr[${JSON.stringify(nd.value)}] : ${JSON.stringify(nd.value)});`;
+    }
+    else if (nd.type == "AlertStatement") {
+        return `alert(dgsknlr[${JSON.stringify(nd.value)}] !== undefined ? dgsknlr[${JSON.stringify(nd.value)}] : ${JSON.stringify(nd.value)});`;
+    }
+    else if (nd.type == "VariableDeclaration" || nd.type == "Assignment") {
+        if (Array.isArray(nd.value)) {
+            return `dgsknlr[${JSON.stringify(nd.name)}] = ifadeHesapla(${JSON.stringify(nd.value)});`;
+        } else {
+            return `dgsknlr[${JSON.stringify(nd.name)}] = isNaN(${JSON.stringify(nd.value)}) ? ${JSON.stringify(nd.value)} : Number(${JSON.stringify(nd.value)});`;
+        }
+    }
+    else if (nd.type == "IfStatement") {
+        return `if (kosulDegerlendir(${JSON.stringify(nd.left)}, ${JSON.stringify(nd.op)}, ${JSON.stringify(nd.right)})) {
+${derle(nd.body)}
+} else {
+${nd.elseBody ? derle(nd.elseBody) : ""}
+}`;
+    }
+    else if (nd.type == "WhileStatement") {
+        return `while (kosulDegerlendir(${JSON.stringify(nd.left)}, ${JSON.stringify(nd.op)}, ${JSON.stringify(nd.right)})) {
+${derle(nd.body)}
+}`;
+    }
+    else if (nd.type == "FunctionDeclaration") {
+        var argIsimleri = nd.params.map(function (p, i) { return "_a" + i; });
+        return `fonksiyonlar[${JSON.stringify(nd.name)}] = {
+    params: ${JSON.stringify(nd.params)},
+    jsFn: function(${argIsimleri.join(",")}) {
+        var __params = ${JSON.stringify(nd.params)};
+        var __args = [${argIsimleri.join(",")}];
+        var __yedek = {};
+        for (var __i = 0; __i < __params.length; __i++) {
+            __yedek[__params[__i]] = dgsknlr[__params[__i]];
+            dgsknlr[__params[__i]] = __args[__i];
+        }
+        var __sonuc = (function () {
+${derle(nd.body)}
+        })();
+        for (var __p in __yedek) {
+            if (__yedek[__p] === undefined) delete dgsknlr[__p];
+            else dgsknlr[__p] = __yedek[__p];
+        }
+        return __sonuc;
+    }
+};`;
+    }
+    else if (nd.type == "Diziyegir") {
+    return `(function(){
+    var __d = dgsknlr[${JSON.stringify(nd.dizi)}];
+    if (!Array.isArray(__d)) { hmbh("Bu bir dizi değil: ${nd.dizi}"); return; }
+    var __i = dgsknlr[${JSON.stringify(nd.indeks)}] !== undefined ? Number(dgsknlr[${JSON.stringify(nd.indeks)}]) : Number(${JSON.stringify(nd.indeks)});
+    __d[__i] = dgsknlr[${JSON.stringify(nd.deger)}] !== undefined ? dgsknlr[${JSON.stringify(nd.deger)}] : ${JSON.stringify(nd.deger)};
+})();`;
+}
+else if (nd.type == "Diziekle") {
+    return `(function(){
+    var __d = dgsknlr[${JSON.stringify(nd.dizi)}];
+    if (!Array.isArray(__d)) { hmbh("Bu bir dizi değil: ${nd.dizi}"); return; }
+    __d.push(dgsknlr[${JSON.stringify(nd.deger)}] !== undefined ? dgsknlr[${JSON.stringify(nd.deger)}] : ${JSON.stringify(nd.deger)});
+})();`;
+}
+else if (nd.type == "Dizikov") {
+    return `(function(){
+    var __d = dgsknlr[${JSON.stringify(nd.dizi)}];
+    if (!Array.isArray(__d)) { hmbh("Bu bir dizi değil: ${nd.dizi}"); return; }
+    dgsknlr["sonuc"] = __d.pop();
+})();`;
+}
+    else if (nd.type == "FunctionCall") {
+        var argsKod = nd.args.map(function (a) { return `cozArg(${JSON.stringify(a)})`; }).join(",");
+        return `if (fonksiyonlar[${JSON.stringify(nd.name)}]) { fonksiyonlar[${JSON.stringify(nd.name)}].jsFn(${argsKod}); } else { hmbh("Fonksiyon bulunamadı: ${nd.name}"); }`;
+    }
+    else if (nd.type == "ReturnStatement") {
+        return `return ifadeHesapla(${JSON.stringify(nd.value)});`;
+    }
+    else if (nd.type == "Parcala") {
+    return "break;";
+}
+    else if (nd.type == "IntervalStatement") {
+        return `setInterval(function () {
+${derle(nd.body)}
+}, Number(${JSON.stringify(nd.delay)}));`;
+    }
+    else if (nd.type == "TimeoutStatement") {
+        return `setTimeout(function () {
+${derle(nd.body)}
+}, Number(${JSON.stringify(nd.delay)}));`;
+    }
+    else if (nd.type == "ClickEvent") {
+        return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    var __fn = fonksiyonlar[${JSON.stringify(nd.handler)}];
+    if (__el && __fn) { __el.addEventListener("click", function () { __fn.jsFn(); }); }
+    else { hmbh("Fonksiyon veya element bulunamadı."); }
+})();`;
+    }
+    else if (nd.type == "MathCall") {
+        return `(function () {
+    var __s = matematikHesapla(${JSON.stringify(nd.method)}, ${JSON.stringify(nd.value)});
+    console.log(__s);
+    dgsknlr["sonuc"] = __s;
+})();`;
+    }
+    else if (nd.type == "SetHTML") {
+        return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (__el) {
+        var __icerik = ${JSON.stringify(nd.html)};
+        __icerik = dgsknlr[__icerik] !== undefined ? dgsknlr[__icerik] : String(__icerik).replace(/^"|"$/g, "");
+        __el.innerHTML = __icerik;
+    }
+})();`;
+    }
+    else if (nd.type == "MetinVer") {
+        return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (__el) {
+        var __icerik = ${JSON.stringify(nd.html)};
+        __icerik = dgsknlr[__icerik] !== undefined ? dgsknlr[__icerik] : String(__icerik).replace(/^"|"$/g, "");
+        __el.textContent = __icerik;
+    }
+})();`;
+    }
+    else if (nd.type == "Kaynakver") {
+    return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (__el) {
+        var __deger = dgsknlr[${JSON.stringify(nd.src)}] !== undefined ? dgsknlr[${JSON.stringify(nd.src)}] : ${JSON.stringify(nd.src)};
+        __el.src = __deger;
+    } else {
+        hmbh("Element bulunamadı: ${nd.element}");
+    }
+})();`;
+}
+    else if (nd.type == "Baglantiver") {
+        return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (__el) {
+        var __icerik = ${JSON.stringify(nd.url)};
+        __icerik = dgsknlr[__icerik] !== undefined ? dgsknlr[__icerik] : String(__icerik).replace(/^"|"$/g, "");
+        __el.href = __icerik;
+    }
+})();`;
+    }
+    else if (nd.type == "Baglantiat") {
+    return `(function () {
+    var __link = ${JSON.stringify(nd.link)};
+    __link = dgsknlr[__link] !== undefined ? dgsknlr[__link] : String(__link).replace(/^"|"$/g, "");
+    window.location.href = __link;
+})();`;
+}
+    else if (nd.type == "Append") {
+        return `(function () {
+    var __p = dgsknlr[${JSON.stringify(nd.parent)}];
+    var __c = dgsknlr[${JSON.stringify(nd.child)}];
+    if (__p && __c) __p.appendChild(__c);
+})();`;
+    }
+        else if (nd.type == "cagiran") {
+        return `(function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", ${JSON.stringify(nd.url)}, false);
+            try {
+                xhr.send();
+                if (xhr.status === 200) {
+                    dgsknlr["__sonuc"] = xhr.responseText;
+                    return xhr.responseText;
+                } else {
+                    hmbh("HTTP hatası: " + xhr.status + " - " + ${JSON.stringify(nd.url)});
+                    return null;
+                }
+            } catch (e) {
+                hmbh("İstek başarısız: " + ${JSON.stringify(nd.url)} + " - " + e.message);
+                return null;
+            }
+        })();`;
+    }
+    else if (nd.type == "sscagiran") {
+        return `(function() {
+            var __xhr = new XMLHttpRequest();
+            __xhr.open("GET", ${JSON.stringify(nd.url)}, false);
+            try {
+                __xhr.send();
+                if (__xhr.status === 200) {
+                var __tkns = TKNRZ(__xhr.responseText);
+            var __modAst = PRS(__tkns);
+            eval(derle(__modAst.body));
+                } else {
+                    hmbh("Hata: " + __xhr.status + " - " + ${JSON.stringify(nd.url)});
+                }
+            } catch (e) {
+                hmbh("İstek başarısız: " + ${JSON.stringify(nd.url)} + " - " + e.message);
+            }
+        })();`;
+    }
+    else if (nd.type == "KontAppend") {
+        return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (__el) document.getElementById("kont1").appendChild(__el);
+})();`;
+    }
+    else if (nd.type == "ClearElement") {
+        return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (__el && __el.remove) __el.remove();
+})();`;
+    }
+    else if (nd.type == "SetStyle") {
+        return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (__el) __el.style.setProperty(${JSON.stringify(nd.property)}, ${JSON.stringify(nd.value)});
+    else hmbh("Element bulunamadı: ${nd.element}");
+})();`; //... ${}'ı görmezden gelin .d ama öyle yazması kolay yani.Hep öyle yapmamda çok gerekince evet yaparım.
+    }
+    else if (nd.type == "Blinkiste") {
+    return `(function () {
+    var __el = dgsknlr[${JSON.stringify(nd.element)}];
+    if (!__el) { hmbh("Element bulunamadı: ${nd.element}"); return; }
+    if (!document.getElementById("__ssblinkstil")) {
+        var __s = document.createElement("style");
+        __s.id = "__ssblinkstil";
+        __s.textContent = "@keyframes ssblink { 50% { opacity: 0; } } .ss-blink { animation: ssblink 0.5s step-start infinite; }";
+        document.head.appendChild(__s);
+    }
+    __el.classList.add("ss-blink");
+})();`;
+}
+    else if (nd.type == "kovala") {
+        return `try{
+        ${derle(nd.tryvcd)}
+        }catch(e){
+        ${nd.yakalavcd ? derle(nd.yakalavcd) : ""}
+        }`;
+    }
+    return "";
+}
+
+function derle(govde) {
+    return govde.map(derleNode).join("\n"); //.map mi? O ancak ES5 ile geldi sorun olmaz .d
+}
+var oldm1 = "yk";
+document.addEventListener("keydown", function(e){
+    var yz1 = document.getElementById("kd1");
+    var str = document.getElementById("str");
+    var satir = yz1.value.split("\n").length;
+    str.textContent = "Satır Sayısı: " + satir;
+    if(satir > 1000 && oldm1 == "yk"){
+        oldm1 = "evt";
+        var eskiyz = yz1.value;
+        yz1.value = 'bismillah\nssuyar("Tebrikler!1000 satırı geçtiniz.")\nelhamdülillah';
+        DRL();
+        setTimeout(function(){
+yz1.value = eskiyz;
+        }, 2000);
+    }
+    if(e.ctrlKey&& e.key == "1"){
+        document.getElementById("kd1").value += "ssyazdır()";
+    }
+    else if(e.ctrlKey && e.key == "2"){
+        document.getElementById("kd1").value += "ssuyar()";
+    }
+    else if(e.ctrlKey && e.key == "3"){
+        document.getElementById("kd1").value += "ssfonksiyon X(){\n\n}";
+    }
+    else if(e.ctrlKey && e.key == "4"){
+        document.getElementById("kd1").value += "ssdöngü(){\n\n}";
+    }
+    else if(e.ctrlKey && e.key == "5"){
+        document.getElementById("kd1").value += "sseğer(){\n\n}";
+    }
+    else if(e.ctrlKey && e.key == "6"){
+        document.getElementById("kd1").value += "ssmatematik.";
+    }
+    else if(e.ctrlKey && e.key == "d"){
+        document.getElementById("kd1").value += "ssdeğişken x = x";
+    }
+    else if(e.ctrlKey && e.key == ","){
+        document.getElementById("kd1").value += "sstagekle()";
+    }
+    else if(e.altKey && e.key == "k"){
+        document.getElementById("kd1").value += "sskontaekle()";
+    }
+    else if(e.shiftKey && e.key == "-"){
+        document.getElementById("kd1").value += "rastgele";
+    }
+    else if(e.shiftKey && e.key == "+"){
+        document.getElementById("kd1").value += "yuvarla";
+    }
+    else if(e.shiftKey && e.key == "-"){
+        document.getElementById("kd1").value += "pi";
+    }
+    else if(e.shiftKey && e.key == "."){
+        document.getElementById("kd1").value += "asagi";
+    }
+    else if(e.shiftKey && e.key == ","){
+        document.getElementById("kd1").value += "yukari";
+    }
+    else if(e.shiftKey && e.key == "m"){
+        document.getElementById("kd1").value += "karekök";
+    }
+    else if(e.shiftKey && e.key == "r"){
+        document.getElementById("kd1").value += "ssrastgeledevlet";
+    }
+    else if(e.shiftKey && e.key == "9"){
+        document.getElementById("kd1").value += "ssyil";
+    }
+    else if(e.shiftKey && e.key == "8"){
+        document.getElementById("kd1").value += "ssmiladiyil";
+    }
+    else if(e.shiftKey && e.key == "z"){
+        document.getElementById("kd1").value += "sslorem";
+    }
+    else if(e.shiftKey && e.key == "s"){
+        document.getElementById("kd1").value += "ssdag";
+    }
+    else if(e.shiftKey && e.key == "e"){
+        document.getElementById("kd1").value += "ssdil";
+    }
+    else if(e.shiftKey && e.key == "w"){
+        document.getElementById("kd1").value += "ssuseragent";
+    }
+    else if(e.shiftKey && e.key == "q"){
+        document.getElementById("kd1").value += "ssplatform";
+    }
+    else if(e.shiftKey && e.key == "i"){
+        document.getElementById("kd1").value += "ssversiyon";
+    }
+    else if(e.shiftKey && e.key == "u"){
+        document.getElementById("kd1").value += "ssmetnecevir()";
+    }
+    else if(e.shiftKey && e.key == "y"){
+        document.getElementById("kd1").value += "sssayiyacevir()";
+    }
+    else if(e.shiftKey && e.key == "t"){
+        document.getElementById("kd1").value += "sscetvel()";
+    }
+    else if(e.shiftKey && e.key == "1"){
+        document.getElementById("kd1").value += "ssekle()";
+    }
+    else if(e.shiftKey && e.key == "2"){
+        document.getElementById("kd1").value += "sstagsil()";
+    } //elhamdülillah 1000. satır
+    else if(e.shiftKey && e.key == "3"){
+        document.getElementById("kd1").value += "sshtmlver()";
+    }
+    else if(e.shiftKey && e.key == "4"){
+        document.getElementById("kd1").value += "ssstilver()";
+    }
+    else if(e.shiftKey && e.key == "5"){
+        document.getElementById("kd1").value += "sstagekle()";
+    }
+    else if(e.shiftKey && e.key == "6"){
+        document.getElementById("kd1").value += "ssmetinver()";
+    }
+    else if(e.shiftKey && e.key == "7"){
+        document.getElementById("kd1").value += "sstikla()";
+    }
+});
+function calistiriframe(jskod){
+    var iframe = document.getElementById("derle");
+
+    var globals = `
+        var hs1 = 0;
+        var hataliste = ["SeairScript Hatası: Belki bir yerde yanlış yapmıştırsın? ", "Hadi be yaparsın", "ee hata bulması zor iş", "Buldun mu?", "İpucu: hata yapma", "tamam o kadar dalga geçtikte yazdıkta hatayı he", "Bak: function değil ssfonksiyon falan kullan dikkatli ol türkçe mi diye her şeye bak. ssrastgele değil direkt rastgele he"];
+        var dgsknlr = {};
+        var fonksiyonlar = {};
+        var ONCELIK = { "+": 1, "-": 1, "*": 2, "/": 2, "%": 2 };
+    `;
+    
+    var functions = `
+        ${isnanmi.toString()}
+        ${isnaneol.toString()}
+        ${argkarae.toString()}
+        ${cozArg.toString()}
+        ${hmbh.toString()}
+        ${matematikHesapla.toString()}
+        ${kosulDegerlendir.toString()}
+        ${ifadeHesapla.toString()}
+        ${calistir.toString()}
+        ${calistirNode.toString()}
+        ${TKNRZ.toString()}
+        ${parseBlock.toString()}
+        ${parseStatement.toString()}
+        ${PRS.toString()}
+        ${derleNode.toString()}
+        ${derle.toString()}
+    `;
+
+    iframe.srcdoc = `
+    <div id="kont1" style="background-color: black; color: lime; padding: 10px; min-height: 100px; border: 1px solid white; font-family: monospace;"></div>
+    <script>
+        ${globals}
+        ${functions}
+        
+        window.addEventListener('message', function(event) {
+            if(event.source != window.parent) return;
+            
+            window.dgsknlr = event.data.dgsknlr;
+            window.fonksiyonlar = event.data.fonksiyonlar;
+            
+            var glnkd = event.data.kod;
+            try {
+                var fn = new Function(glnkd);
+                var sonuc = fn();
+                window.parent.postMessage({ sonuc: "Kod başarıyla çalıştı!", hata: null }, "*");
+            } catch (e) {
+                window.parent.postMessage({ sonuc: null, hata: e.message }, "*");
+            }
+        });
+    <\/script>
+    `;
+
+    iframe.onload = function(){
+        iframe.contentWindow.postMessage({
+            kod: jskod,
+            dgsknlr: dgsknlr,
+            fonksiyonlar: fonksiyonlar
+        }, '*');
+    };
+}
+var standartk = `bismillah
+ssfonksiyon ssminimum(ilkd, sond){
+sseğer(ilkd < sond){
+ssdöndür ilkd;
+}
+sseğerinzıttı{
+ssdöndür sond;
+}
+}
+ssfonksiyon ssmaksimum(ilkd1, sond1){
+sseğer(ilkd1 > sond1){
+ssdöndür ilkd1;
+}
+sseğerinzıttı{
+ssdöndür sond1;
+}
+}
+ssfonksiyon ssortalama(ilks1, ikis1){
+ssdeğişken sc1 = ilks1 + ikis1;
+ssdeğişken sc2 = sc1 / 2;
+ssdöndür sc2;
+}
+ssfonksiyon ssdizibirlestir(ilkdizi, ikincidizi){
+    ssdeğişken sonuc1 = ⌞⌝;
+    ssdeğişken i1 = 0;
+    ssdeğişken uzunluklar1 = sscetvel(ilkdizi);
+    ssdöngü(i1 < uzunluklar1){
+        ssdeğişken iki = ilkdizi⌞i1⌝;
+        ssdiziyeekle(sonuc1, iki);
+        ssata i1 = i1 + 1;
+    }
+        ssdeğişken i2 = 0;
+    ssdeğişken uzunluklar2 = sscetvel(ikincidizi);
+    ssdöngü(i2 < uzunluklar2){
+        ssdeğişken ilkdz = ikincidizi⌞i2⌝;
+        ssdiziyeekle(sonuc1, ilkdz);
+        ssata i2 = i2 + 1;
+    }
+    ssdöndür sonuc1;
+}
+ssfonksiyon ssdiziters(dizi1){
+    ssdeğişken sonuc = ⌞⌝;
+    ssdeğişken uzunluk = sscetvel(dizi1);
+    ssdeğişken i3 = uzunluk - 1;
+    ssdöngü(i3 >= 0){
+        ssdeğişken snc1 = dizi1⌞i3⌝;
+        ssdiziyeekle(sonuc, snc1);
+        ssata i3 = i3 - 1;
+    }
+    ssdöndür sonuc;
+}
+    ssfonksiyon ssçınar(){
+    ssdöndür "çınar";
+    }
+    ssfonksiyon ssebob(deger1, deger2){
+    ssdeğişken x = deger1;
+    ssdeğişken y = deger2;
+    ssdöngü(y != 0){
+    ssdeğişken gcc = y;
+    ssata y = x % y;
+    ssata x = gcc;
+    }
+    ssdöndür x;
+    }
+    ssfonksiyon ssekok(dgr1, dgr2){
+    ssdeğişken snceb = ssebob(dgr1, dgr2);
+    ssdöndür (dgr1 * dgr2) / snceb;
+    }
+    ssfonksiyon sshipotenus(kenar1, kenar2){
+    ssdeğişken kare1 = kenar1 ^* 2;
+    ssdeğişken kare2 = kenar2 ^* 2;
+    ssdeğişken islem1 = kare1 + kare2;
+    ssdeğişken sonuç58 = ssmatematik.karekök(islem1);
+    ssdöndür sonuç58;
+    }
+    ssfonksiyon ssbasitgama(say1){
+    ssdeğişken islem1 = say1 - 1;
+    ssdeğişken islem2 = ssmatematik.faktöriyel(islem1);
+    ssdöndür islem2;
+    }
+    ssfonksiyon ss_duzenli_mailmi(metin1){
+    ssdeğişken a = ssduzenliara(metin1, "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
+    ssdöndür a;
+    }
+    ssfonksiyon ss_duzenli_telmi(numara1){
+    ssdeğişken a = ssduzenliara(numara1, "^(0)?5[0-9]{9}$");
+    ssdöndür a;
+    }
+    ssfonksiyon sssifreyiguclendir(sifre){
+    ssdeğişken snc = "";
+    ssdeğişken basae = ⌞"["→"}"→"&"→"^"→"&"⌝;
+    ssdeğişken islem1 = ssmatematik.rastgele();
+    ssdeğişken uznlk = sscetvel(basae);
+    ssdeğişken islem2 = islem1 * uznlk;
+    ssdeğişken fark1 = ssmatematik.rastgele();
+    ssdeğişken fark2 = fark1 * uznlk;
+    ssdeğişken p = ssmatematik.asagi(fark2) + 1;
+    ssdeğişken h = ssmatematik.asagi(islem2) + 1;
+    ssata snc = snc + basae⌞h⌝;
+    ssata snc = snc + basae⌞p⌝;
+    ssdeğişken sifreg1 = sskarakterkodu(sifre);
+    ssdeğişken sifreg2 = sifreg1 #^# 1;
+    ssdeğişken sifreg3 = ssharfyap(sifreg2);
+    ssata snc = snc + sifreg3;
+    ssdeğişken k1 = sskarakter(sifre, p);
+    ssdeğişken k2 = sskarakter(sifre, 2);
+    ssdeğişken k3 = sskarakter(sifre, 5);
+    ssdeğişken harfler = k1 + k2 + k3;
+    ssata snc = snc + harfler;
+    ssata snc = snc + basae⌞h⌝;
+    ssata snc = ssyeritekrarla(snc, "a", "j");
+    ssata snc = ssyeritekrarla(snc, "j", "a");
+    ssata snc = ssyeritekrarla(snc, "c", "d");
+    ssata snc = ssyeritekrarla(snc, "d", "c");
+    ssata snc = ssyeritekrarla(snc, "x", "|");
+    ssata snc = ssyeritekrarla(snc, "|", "x");
+    ssata snc = ssyeritekrarla(snc, "e", "#");
+    ssata snc = ssyeritekrarla(snc, "#", "e");
+    ssata snc = ssyeritekrarla(snc, "u", "L");
+    ssata snc = ssyeritekrarla(snc, "L", "u");
+    ssata snc = ssyeritekrarla(snc, "4", "7");
+    ssata snc = ssyeritekrarla(snc, "7", "4");
+    ssata snc = ssyeritekrarla(snc, "3", "9");
+    ssata snc = ssyeritekrarla(snc, "9", "3");
+    ssata snc = ssyeritekrarla(snc, "2", "1");
+    ssata snc = ssyeritekrarla(snc, "1", "2");
+    ssdeğişken sncu = sscetvel(snc);
+    ssdeğişken i = 0;
+    ssdöngü(i < sncu){
+    ssata snc = ssyeritekrarla(snc, ",", "");
+    ssata i = i + 1;
+}
+    ssdöndür snc;
+    }
+    ssfonksiyon ssdaireciz(tuval,mx,my,yaricap,renk){
+    ssdeğişken tau1 = ssmatematik.tau;
+    ssdeğişken adm = 1453; >>neden 1453 diye sormayın .d
+    ssdeğişken aci = 0;
+    ssdeğişken adim = tau1 / adm;
+    ssdöngü(aci < tau1){
+    ssdeğişken cosd = ssmatematik.cos(aci);
+    ssdeğişken sind = ssmatematik.sin(aci);
+    ssdeğişken x1 = mx + (yaricap * cosd);
+    ssdeğişken y1 = my + (yaricap * sind);
+    ssdeğişken dikdort = ssdikdortgenciz(tuval, x1, y1, 2, 2, renk);
+    ssata aci = aci + adim;
+    }
+    ssdöndür "daire çizildi.";
+    }
+    ssfonksiyon ssdoludaireciz(tuval,mx,my,yaricap,renk){
+ssdeğişken ty = my - yaricap;
+ssdeğişken snr = my + yaricap;
+ssdöngü(ty <= snr){
+ssdeğişken frk = ty - my;
+ssdeğişken frkk = frk ^* 2;
+ssdeğişken yarikare = yaricap ^* 2;
+ssdeğişken ickok = yarikare - frkk;
+sseğer(ickok >= 0){
+ssdeğişken dx = ssmatematik.karekök(ickok);
+ssdeğişken solx = mx - dx;
+ssdeğişken gnslk = dx * 2;
+ssdeğişken czg = ssdikdortgenciz(tuval, solx, ty, gnslk, 1, renk);
+}
+ssata ty = ty + 1;
+}
+ssdöndür "dolu daire çizildi.";
+    }
+ssfonksiyon ssguvenli(metincik){
+ssdeğişken metincik = metincik;
+ssata metincik = ssyeritekrarlatüm(metincik, "&amp;", "");
+ssata metincik = ssyeritekrarlatüm(metincik, "<", "");
+ssata metincik = ssyeritekrarlatüm(metincik, "&lt;", "");
+ssata metincik = ssyeritekrarlatüm(metincik, ">", "");
+ssata metincik = ssyeritekrarlatüm(metincik, "&gt;", "");
+ssata metincik = ssyeritekrarlatüm(metincik, "&quot", "");
+ssata metincik = ssyeritekrarlatüm(metincik, "'", "");
+ssata metincik = ssyeritekrarlatüm(metincik, "&#39;", "");
+ssdöndür metincik;
+}
+elhamdülillah`;
+function DRL(){
+    dgsknlr = {};
+    fonksiyonlar = {};
+    var code = document.getElementById("kd1").value;
+    var tokens = TKNRZ(code);
+    if(tokens.length < 2 || tokens[0] != "bismillah" || tokens[tokens.length - 1] != "elhamdülillah"){ //bu kodun amacı mizah değil.Amaç İslamı hatırlatmak.İnşAllah doğruyu yapmıştırım.
+console.error("Kod besmele ile başlamalı hamd ile bitmeli.Bereketli olur hem inşAllah");
+return;
+    }
+    tokens.shift();
+    tokens.pop();
+    var ast = PRS(tokens);
+    var jskod = derle(ast.body);
+    try{
+        calistiriframe(jskod);
+    }catch (e){
+hmbh("Kodu derleyemedik yorumlamanızı öneririm hata mesajıda: " + e.message);
+    }
+}
+window.addEventListener('message', function(event) {
+    if (event.data && event.data.sonuc != undefined) {
+        console.log('sonuç şöyle ha:', event.data.sonuc);
+    }
+});
+function GNDR() {
+    for(var __k in dgsknlr) delete dgsknlr[__k];
+    for(var __k2 in domb) delete domb[__k2];
+    fonksiyonlar = {};
+    var vrsyln = TKNRZ(standartk);
+    vrsyln.shift();
+    vrsyln.pop();
+    var vrsylnast = PRS(vrsyln);
+    calistir(vrsylnast.body);
+    var code = document.getElementById("kd1").value;
+    var tokens = TKNRZ(code);
+    if(tokens.length < 2 || tokens[0] != "bismillah" || tokens[tokens.length - 1] != "elhamdülillah"){ //bu kodun amacı mizah değil.Amaç İslamı hatırlatmak.İnşAllah doğruyu yapmıştırım.
+console.error("Kod besmele ile başlamalı hamd ile bitmeli.Bereketli olur hem inşAllah");
+return;
+    }
+    tokens.shift();
+    tokens.pop();
+    var ast = PRS(tokens);
+    calistir(ast.body);
+}
+function clstrss(kod){
+    var tokens = TKNRZ(kod);
+    if(tokens.length < 2 || tokens[0] != "bismillah" || tokens[tokens.length - 1] != "elhamdülillah"){
+console.error("Kod besmele ile başlamalı hamd ile bitmeli.Bereketli olur hem inşAllah");
+return;
+    }
+    tokens.shift();
+    tokens.pop();
+    var ast = PRS(tokens);
+    calistir(ast.body);
+}
+function INDR() {
+    var yazi = document.getElementById("kd1").value;
+    var soru1 = prompt("Dosya adı ne olsun?");
+    if (!soru1) return;
+    var blob = new Blob([yazi], { type: "text/plain" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = soru1 + ".seairsc";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
+<!--
+>>şuan normalde şu komutlar yok:
+ssisletimsistemi (doğrudan donanımda çalıştırır kodu.)
+sspanikatak (hata olduğunda sistemi durdurur)
+ssbootloader (bootloader çalıştırır)
+sskernelyap (direkt kernel oluşturur)
+ssekranayaz (ekrana yazdırır)
+ssport (port)
+sskalanınıhallet (kalan gereken şeyleri halleder)
+yani yorumlayıcısı/derleyicisi olmasada siz var sayın.Çünkü teorik olarak bana göre var yani seairscript ile işletim sistemi yapabilirsiniz.Yani dil teoriktir yani.İsterseniz bir OS yapabilirsiniz seairscript ile.(ama hayali :))
+C öğrenmek yerine yorum satırında bunları yazıyorum.siz derleyici/yorumlayıcı yaparsınız bu konular için .d
+-->
